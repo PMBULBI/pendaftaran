@@ -17,15 +17,12 @@ func TestPmbdb_TableMigrator(t *testing.T) {
 func TestInsertDataPendaftar(t *testing.T) {
 	conn := CreateMariaGormConnection("MARIASTRING")
 	data := pmbulbi.Pendaftaran{
-		ID:              1,
 		NamaMhs:         "Test",
 		AsalSekolah:     "Bandung High School",
 		EmailMhs:        "Testing@gmail.com",
 		HpMhs:           "62851666465",
 		ProvinsiSekolah: "Jawa barat",
 		KotaSekolah:     "Bandung",
-		Password:        "test",
-		StatusMhs:       0,
 		UsernameAdmin:   "rofi",
 		TglDaftarMhs:    carbon.Now(),
 	}
@@ -44,19 +41,15 @@ func TestEncrypt(t *testing.T) {
 
 func TestPendaftaran(t *testing.T) {
 	insdata := pmbulbi.Pendaftaran{
-		ID:              2,
 		NamaMhs:         "Test",
 		AsalSekolah:     "Bandung High School",
 		EmailMhs:        "Testing@gmail.com",
 		HpMhs:           "62851666465",
 		ProvinsiSekolah: "Jawa barat",
 		KotaSekolah:     "Bandung",
-		Password:        "test",
-		StatusMhs:       0,
 		UsernameAdmin:   "rofi",
 		TglDaftarMhs:    carbon.Now(),
 	}
-	data, err := Pendaftaran(context.Background(), "MARIASTRING", insdata)
-	fmt.Println(err)
+	data := Pendaftaran(context.Background(), "MARIASTRING", insdata)
 	fmt.Println(data)
 }
