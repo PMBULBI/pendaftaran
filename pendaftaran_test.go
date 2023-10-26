@@ -9,13 +9,13 @@ import (
 )
 
 func TestPmbdb_TableMigrator(t *testing.T) {
-	Migrate, err := TableMigrator("irc:rollyganteng@tcp(10.14.200.17:3307)/pmb_ulbi?parseTime=true", pmbulbi.DaftarSekolah{})
+	Migrate, err := TableMigrator("MARIA", pmbulbi.DaftarSekolah{})
 	fmt.Println(err)
 	fmt.Println(Migrate)
 }
 
 func TestInsertDataPendaftar(t *testing.T) {
-	conn := CreateMariaGormConnection("irc:rollyganteng@tcp(10.14.200.17:3307)/pmb_ulbi?parseTime=true")
+	conn := CreateMariaGormConnection("MARIA")
 	data := pmbulbi.Pendaftaran{
 		NamaMhs:         "Test",
 		AsalSekolah:     "Bandung High School",
@@ -31,10 +31,10 @@ func TestInsertDataPendaftar(t *testing.T) {
 }
 
 func TestEncrypt(t *testing.T) {
-	strnger := "rofiganteng"
-	hasil := "TktBSVlaUDRJUQ=="
-	encrypted := Encrypter(strnger)
-	decrypted := Decrypter(hasil)
+	strnger := fmt.Sprintf("%s", "rofiganteng")
+	key := "rofigantengbanget"
+	encrypted := Encrypt(strnger, key)
+	decrypted := Decrypt(encrypted, key)
 
 	fmt.Println("enc", encrypted)
 	fmt.Println("dec", decrypted)
@@ -51,6 +51,6 @@ func TestPendaftaran(t *testing.T) {
 		UsernameAdmin:   "rofi",
 		TglDaftarMhs:    carbon.Now(),
 	}
-	data := Pendaftaran(context.Background(), "irc:rollyganteng@tcp(10.14.200.17:3307)/pmb_ulbi?parseTime=true", insdata)
+	data := Pendaftaran(context.Background(), "MARIA", "rofiganteng", insdata)
 	fmt.Println(data)
 }

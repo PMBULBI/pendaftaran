@@ -6,11 +6,11 @@ import (
 	"github.com/golang-module/carbon/v2"
 )
 
-func Pendaftaran(ctx context.Context, Mariaenv string, val pmbulbi.Pendaftaran) (err error) {
+func Pendaftaran(ctx context.Context, Mariaenv, secret string, val pmbulbi.Pendaftaran) (err error) {
 	conn := CreateMariaGormConnection(Mariaenv)
 
 	mypass := GenerateRandomPassword(10)
-	passwordencrypted := Encrypter(mypass)
+	passwordencrypted := Encrypt(mypass, secret)
 	data := pmbulbi.Pendaftaran{
 		NamaMhs:         val.NamaMhs,
 		AsalSekolah:     val.AsalSekolah,
