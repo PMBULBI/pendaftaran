@@ -1,16 +1,21 @@
 package pendaftaran
 
 import (
-	"database/sql"
-	"github.com/aiteung/atdb"
-	"os"
+	"gorm.io/driver/mysql"
+	"gorm.io/gorm"
+	"gorm.io/gorm/schema"
 )
 
-func CreateMariaConnection(MariaString, dbname string) *sql.DB {
-	MariaInfo := atdb.DBInfo{
-		DBString: os.Getenv(MariaString),
-		DBName:   dbname,
+func CreateMariaGormConnection(Mariastring string) *gorm.DB {
+	DB, err := gorm.Open(mysql.Open(Mariastring), &gorm.Config{
+		NamingStrategy: schema.NamingStrategy{
+			SingularTable: true,
+		},
+	})
+	DB.Statement.RaiseErrorOnNotFound = true
+
+	if err != nil {
+		panic(err)
 	}
-	db := atdb.MariaConnect(MariaInfo)
-	return db
+	return DB
 }
