@@ -9,13 +9,13 @@ import (
 )
 
 func TestPmbdb_TableMigrator(t *testing.T) {
-	Migrate, err := TableMigrator("MARIASTRING", pmbulbi.Pendaftaran{})
+	Migrate, err := TableMigrator("irc:rollyganteng@tcp(10.14.200.17:3307)/pmb_ulbi?parseTime=true", pmbulbi.DaftarSekolah{})
 	fmt.Println(err)
 	fmt.Println(Migrate)
 }
 
 func TestInsertDataPendaftar(t *testing.T) {
-	conn := CreateMariaGormConnection("MARIASTRING")
+	conn := CreateMariaGormConnection("irc:rollyganteng@tcp(10.14.200.17:3307)/pmb_ulbi?parseTime=true")
 	data := pmbulbi.Pendaftaran{
 		NamaMhs:         "Test",
 		AsalSekolah:     "Bandung High School",
@@ -32,8 +32,9 @@ func TestInsertDataPendaftar(t *testing.T) {
 
 func TestEncrypt(t *testing.T) {
 	strnger := "rofiganteng"
+	hasil := "TktBSVlaUDRJUQ=="
 	encrypted := Encrypter(strnger)
-	decrypted := Decrypter(encrypted)
+	decrypted := Decrypter(hasil)
 
 	fmt.Println("enc", encrypted)
 	fmt.Println("dec", decrypted)
@@ -41,7 +42,7 @@ func TestEncrypt(t *testing.T) {
 
 func TestPendaftaran(t *testing.T) {
 	insdata := pmbulbi.Pendaftaran{
-		NamaMhs:         "Test",
+		NamaMhs:         "Testeeeee",
 		AsalSekolah:     "Bandung High School",
 		EmailMhs:        "Testing@gmail.com",
 		HpMhs:           "62851666465",
@@ -50,6 +51,6 @@ func TestPendaftaran(t *testing.T) {
 		UsernameAdmin:   "rofi",
 		TglDaftarMhs:    carbon.Now(),
 	}
-	data := Pendaftaran(context.Background(), "MARIASTRING", insdata)
+	data := Pendaftaran(context.Background(), "irc:rollyganteng@tcp(10.14.200.17:3307)/pmb_ulbi?parseTime=true", insdata)
 	fmt.Println(data)
 }

@@ -8,7 +8,9 @@ import (
 
 func Pendaftaran(ctx context.Context, Mariaenv string, val pmbulbi.Pendaftaran) (err error) {
 	conn := CreateMariaGormConnection(Mariaenv)
-	passwordencrypted := Encrypter(val.Password)
+
+	mypass := GenerateRandomPassword(10)
+	passwordencrypted := Encrypter(mypass)
 	data := pmbulbi.Pendaftaran{
 		NamaMhs:         val.NamaMhs,
 		AsalSekolah:     val.AsalSekolah,
