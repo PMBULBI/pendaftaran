@@ -10,7 +10,7 @@ import (
 )
 
 func TestPmbdb_TableMigrator(t *testing.T) {
-	Migrate, err := TableMigrator("MARIA", pmbulbi.DaftarSekolah{})
+	Migrate, err := TableMigrator("MARIA", pmbulbi.WilayahProvinsi{})
 	fmt.Println(err)
 	fmt.Println(Migrate)
 }
@@ -71,5 +71,15 @@ func TestPendaftaran(t *testing.T) {
 		TglDaftarMhs: carbon.Now(),
 	}
 	data := Pendaftaran(context.Background(), "MARIA", "rofiganteng", insdata)
+	fmt.Println(data)
+}
+
+func TestGetAllProvinsi(t *testing.T) {
+	data, err := GetAllProvinsi(context.Background(), "MARIA")
+
+	if err != nil {
+		t.Errorf("Error in GetAllProvinsi: %v", err)
+	}
+
 	fmt.Println(data)
 }

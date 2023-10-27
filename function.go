@@ -49,3 +49,11 @@ func InsertDataPendaftar(conn *gorm.DB, ctx context.Context, val pmbulbi.Pendaft
 		Error
 	return
 }
+
+func GetProvinsi(conn *gorm.DB, ctx context.Context) (val []pmbulbi.WilayahProvinsi, err error) {
+	err = conn.
+		WithContext(ctx).
+		Find(&val).
+		Error
+	return
+}

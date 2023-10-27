@@ -36,3 +36,22 @@ func Pendaftaran(ctx context.Context, Mariaenv, secret string, val pmbulbi.Penda
 	}
 	return
 }
+
+func GetAllProvinsi(ctx context.Context, Mariaenv string) (dataProvinsi []pmbulbi.ProvinsiResponse, err error) {
+	conn := CreateMariaGormConnection(Mariaenv)
+
+	val, err := GetProvinsi(conn, ctx)
+
+	if err != nil {
+		return nil, err
+	}
+
+	for _, v := range val {
+		dataProvinsi = append(dataProvinsi, pmbulbi.ProvinsiResponse{
+			IDProvinsi:   v.IDProvinsi,
+			NamaProvinsi: v.NamaProvinsi,
+		})
+	}
+
+	return dataProvinsi, nil
+}
