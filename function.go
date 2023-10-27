@@ -57,3 +57,11 @@ func GetProvinsi(conn *gorm.DB, ctx context.Context) (val []pmbulbi.WilayahProvi
 		Error
 	return
 }
+
+func GetKota(conn *gorm.DB, ctx context.Context) (val []pmbulbi.WilayahKota, err error) {
+	err = conn.
+		WithContext(ctx).
+		Find(&val).
+		Error
+	return
+}

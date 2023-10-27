@@ -55,3 +55,23 @@ func GetAllProvinsi(ctx context.Context, Mariaenv string) (dataProvinsi []pmbulb
 
 	return dataProvinsi, nil
 }
+
+func GetAllKota(ctx context.Context, Mariaenv string) (dataKota []pmbulbi.KotaResponse, err error) {
+	conn := CreateMariaGormConnection(Mariaenv)
+
+	val, err := GetKota(conn, ctx)
+
+	if err != nil {
+		return nil, err
+	}
+
+	for _, v := range val {
+		dataKota = append(dataKota, pmbulbi.KotaResponse{
+			IDKota:     v.IDKota,
+			IDProvinsi: v.IDProvinsi,
+			NamaKota:   v.NamaKota,
+		})
+	}
+
+	return dataKota, nil
+}
