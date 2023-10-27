@@ -3,7 +3,7 @@ module github.com/PMBULBI/pendaftaran
 go 1.21.0
 
 require (
-	github.com/PMBULBI/types v0.0.7
+	github.com/PMBULBI/types v0.0.9
 	github.com/golang-module/carbon/v2 v2.2.11
 	github.com/golang-module/dongle v0.2.8
 	gorm.io/driver/mysql v1.5.2
