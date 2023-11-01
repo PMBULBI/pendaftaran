@@ -74,3 +74,23 @@ func GetSatuPendaftar(conn *gorm.DB, ctx context.Context, id string) (dest pmbul
 		Error
 	return
 }
+
+func GetKotaLimits(conn *gorm.DB, ctx context.Context, page, perPage int) (val []pmbulbi.WilayahKota, err error) {
+	offset := (page - 1) * perPage
+	err = conn.
+		WithContext(ctx).
+		Limit(perPage).
+		Offset(offset).
+		Find(&val).
+		Error
+	return
+}
+
+func GetSekolahLimits(conn *gorm.DB, ctx context.Context, lim int, name string) (dest []pmbulbi.DaftarSekolah, err error) {
+	err = conn.WithContext(ctx).
+		Limit(lim).
+		Where("nama_sekolah LIKE ?", "%"+name+"%").
+		Find(&dest).
+		Error
+	return
+}
