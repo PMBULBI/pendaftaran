@@ -108,15 +108,15 @@ func VerifyPassword(user pmbulbi.Pendaftaran, secret string, val pmbulbi.Request
 	return nil
 }
 
-func Login(ctx context.Context, Mariaenv, email, password string, secret string) (err error) {
+func Login(ctx context.Context, Mariaenv, secret string, val pmbulbi.RequestLogin) (err error) {
 	conn := CreateMariaGormConnection(Mariaenv)
 
-	user, err := CheckUserExists(conn, ctx, email)
+	user, err := CheckUserExists(conn, ctx, val.Email)
 	if err != nil {
 		return errors.New("User tidak terdaftar")
 	}
 
-	err = VerifyPassword(user, email, password, secret)
+	err = VerifyPassword(user, secret, val)
 	if err != nil {
 		return err
 	}
