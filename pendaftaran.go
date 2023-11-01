@@ -3,6 +3,7 @@ package pendaftaran
 import (
 	"context"
 	"database/sql"
+	"errors"
 	pmbulbi "github.com/PMBULBI/types/schemas"
 	"github.com/golang-module/carbon/v2"
 )
@@ -96,4 +97,13 @@ func GetDaftarSekolahlimit5(ctx context.Context, Mariaenv string, limit int, sch
 	}
 
 	return school, nil
+}
+
+func VerifyPassword(user pmbulbi.Pendaftaran, password, secret string) error {
+	// Verifikasi password
+	decryptedPassword := Decrypt(user.Password, secret)
+	if decryptedPassword != password {
+		return errors.New("Password salah")
+	}
+	return nil
 }
