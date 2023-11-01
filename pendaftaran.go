@@ -75,3 +75,14 @@ func GetAllKota(ctx context.Context, Mariaenv string) (dataKota []pmbulbi.KotaRe
 
 	return dataKota, nil
 }
+
+func GetOnePendaftar(ctx context.Context, Mariaenv, id string) (data pmbulbi.Pendaftaran, err error) {
+	conn := CreateMariaGormConnection(Mariaenv)
+
+	use, err := GetSatuPendaftar(conn, ctx, id)
+	if err != nil {
+		return pmbulbi.Pendaftaran{}, err
+	}
+
+	return use, nil
+}
