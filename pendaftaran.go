@@ -100,10 +100,25 @@ func GetDaftarSekolahlimit5(ctx context.Context, Mariaenv string, limit int, sch
 }
 
 func VerifyPassword(user pmbulbi.Pendaftaran, password, secret string) error {
-	// Verifikasi password
 	decryptedPassword := Decrypt(user.Password, secret)
 	if decryptedPassword != password {
 		return errors.New("Password salah")
 	}
+	return nil
+}
+
+func Login(ctx context.Context, Mariaenv, email, password string, secret string) (err error) {
+	conn := CreateMariaGormConnection(Mariaenv)
+
+	user, err := CheckUserExists(conn, ctx, email)
+	if err != nil {
+		return err
+	}
+
+	err = VerifyPassword(user, password, secret)
+	if err != nil {
+		return err
+	}
+
 	return nil
 }
