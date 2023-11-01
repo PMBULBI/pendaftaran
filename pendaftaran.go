@@ -86,3 +86,14 @@ func GetOnePendaftar(ctx context.Context, Mariaenv, id string) (data pmbulbi.Pen
 
 	return use, nil
 }
+
+func GetDaftarSekolahlimit5(ctx context.Context, Mariaenv string, limit int, schoolname string) (data []pmbulbi.DaftarSekolah, err error) {
+	conn := CreateMariaGormConnection(Mariaenv)
+
+	school, err := GetSekolahLimits(conn, ctx, limit, schoolname)
+	if err != nil {
+		return nil, err
+	}
+
+	return school, nil
+}
