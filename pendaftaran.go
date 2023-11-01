@@ -99,9 +99,9 @@ func GetDaftarSekolahlimit5(ctx context.Context, Mariaenv string, limit int, sch
 	return school, nil
 }
 
-func VerifyPassword(user pmbulbi.Pendaftaran, email, password, secret string) error {
+func VerifyPassword(user pmbulbi.Pendaftaran, secret string, val pmbulbi.RequestLogin) error {
 	decryptedPassword := Decrypt(user.Password, secret)
-	if user.EmailMhs != email || decryptedPassword != password {
+	if user.EmailMhs != val.Email || decryptedPassword != val.Password {
 		return errors.New("Email atau password salah")
 	}
 
