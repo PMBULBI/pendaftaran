@@ -94,3 +94,11 @@ func GetSekolahLimits(conn *gorm.DB, ctx context.Context, lim int, name string) 
 		Error
 	return
 }
+
+func CheckUserExists(conn *gorm.DB, ctx context.Context, email string) (user pmbulbi.Pendaftaran, err error) {
+	err = conn.WithContext(ctx).
+		Where("email_mhs = ?", email).
+		First(&user).
+		Error
+	return user, err
+}
