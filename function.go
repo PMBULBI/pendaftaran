@@ -65,3 +65,12 @@ func GetKota(conn *gorm.DB, ctx context.Context) (val []pmbulbi.WilayahKota, err
 		Error
 	return
 }
+
+func GetSatuPendaftar(conn *gorm.DB, ctx context.Context, id string) (dest pmbulbi.Pendaftaran, err error) {
+	err = conn.
+		WithContext(ctx).
+		Where("id = ? ", id).
+		First(&dest).
+		Error
+	return
+}
