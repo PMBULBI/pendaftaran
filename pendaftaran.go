@@ -113,10 +113,10 @@ func Login(ctx context.Context, Mariaenv, email, password string, secret string)
 
 	user, err := CheckUserExists(conn, ctx, email)
 	if err != nil {
-		return err
+		return errors.New("User tidak terdaftar")
 	}
 
-	err = VerifyPassword(user, password, secret)
+	err = VerifyPassword(user, email, password, secret)
 	if err != nil {
 		return err
 	}
