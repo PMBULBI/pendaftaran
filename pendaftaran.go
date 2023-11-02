@@ -77,27 +77,15 @@ func GetAllKota(ctx context.Context, Mariaenv string) (dataKota []pmbulbi.KotaRe
 	return dataKota, nil
 }
 
-func GetOnePendaftar(ctx context.Context, Mariaenv, id string) (data pmbulbi.ResponsePendaftaran, err error) {
+func GetOnePendaftar(ctx context.Context, Mariaenv, id string) (data pmbulbi.Pendaftaran, err error) {
 	conn := CreateMariaGormConnection(Mariaenv)
 
 	user, err := GetSatuPendaftar(conn, ctx, id)
 	if err != nil {
-		return pmbulbi.ResponsePendaftaran{}, err
+		return pmbulbi.Pendaftaran{}, err
 	}
 
-	data.ID = user.ID
-	data.NamaMhs = user.NamaMhs
-	data.AsalSekolah = user.AsalSekolah
-	data.EmailMhs = user.EmailMhs
-	data.HpMhs = user.HpMhs
-	data.ProvinsiSekolah = user.ProvinsiSekolah.String
-	data.KotaSekolah = user.KotaSekolah.String
-	data.Password = user.Password
-	data.StatusMhs = user.StatusMhs
-	data.UsernameAdmin = user.UsernameAdmin.String
-	data.TglDaftarMhs = user.TglDaftarMhs
-
-	return data, nil
+	return user, nil
 }
 
 func GetDaftarSekolahlimit5(ctx context.Context, Mariaenv string, limit int, schoolname string) (data []pmbulbi.DaftarSekolah, err error) {
