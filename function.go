@@ -95,6 +95,14 @@ func GetSekolahLimits(conn *gorm.DB, ctx context.Context, lim int, name string) 
 	return
 }
 
+func GetProvNama(conn *gorm.DB, ctx context.Context, prov string) (dest []pmbulbi.WilayahProvinsi, err error) {
+	err = conn.WithContext(ctx).
+		Where("nama_provinsi LIKE ?", "%"+prov+"%").
+		Find(&dest).
+		Error
+	return
+}
+
 func CheckUserExists(conn *gorm.DB, ctx context.Context, email string) (user pmbulbi.Pendaftaran, err error) {
 	err = conn.WithContext(ctx).
 		Where("email_mhs = ?", email).
