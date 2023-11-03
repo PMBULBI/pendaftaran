@@ -99,6 +99,17 @@ func GetDaftarSekolahlimit5(ctx context.Context, Mariaenv string, limit int, sch
 	return school, nil
 }
 
+func GetProvinsiNama(ctx context.Context, Mariaenv string, provname string) (data []pmbulbi.WilayahProvinsi, err error) {
+	conn := CreateMariaGormConnection(Mariaenv)
+
+	provinsi, err := GetProvNama(conn, ctx, provname)
+	if err != nil {
+		return nil, err
+	}
+
+	return provinsi, nil
+}
+
 func VerifyPassword(user pmbulbi.Pendaftaran, secret string, val pmbulbi.RequestLogin) error {
 	decryptedPassword := Decrypt(user.Password, secret)
 	if user.EmailMhs != val.Email || decryptedPassword != val.Password {
