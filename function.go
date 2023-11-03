@@ -103,6 +103,14 @@ func GetProvNama(conn *gorm.DB, ctx context.Context, prov string) (dest []pmbulb
 	return
 }
 
+func GetKotaByIdProvinsi(conn *gorm.DB, ctx context.Context, id_prov string) (dest []pmbulbi.WilayahKota, err error) {
+	err = conn.WithContext(ctx).
+		Where("id_provinsi LIKE ?", "%"+id_prov+"%").
+		Find(&dest).
+		Error
+	return
+}
+
 func CheckUserExists(conn *gorm.DB, ctx context.Context, email string) (user pmbulbi.Pendaftaran, err error) {
 	err = conn.WithContext(ctx).
 		Where("email_mhs = ?", email).
