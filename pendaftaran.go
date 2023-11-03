@@ -110,6 +110,17 @@ func GetProvinsiNama(ctx context.Context, Mariaenv string, provname string) (dat
 	return provinsi, nil
 }
 
+func GetKotaByProvId(ctx context.Context, Mariaenv string, id_prov string) (data []pmbulbi.WilayahKota, err error) {
+	conn := CreateMariaGormConnection(Mariaenv)
+
+	kota, err := GetKotaByIdProvinsi(conn, ctx, id_prov)
+	if err != nil {
+		return nil, err
+	}
+
+	return kota, nil
+}
+
 func VerifyPassword(user pmbulbi.Pendaftaran, secret string, val pmbulbi.RequestLogin) error {
 	decryptedPassword := Decrypt(user.Password, secret)
 	if user.EmailMhs != val.Email || decryptedPassword != val.Password {
