@@ -127,9 +127,9 @@ func GetKotaByIdProvinsiNamaKota(conn *gorm.DB, ctx context.Context, id_prov str
 	return
 }
 
-func CheckUserExists(conn *gorm.DB, ctx context.Context, email string) (user pmbulbi.Pendaftaran, err error) {
+func CheckUserExists(conn *gorm.DB, ctx context.Context, email string, nohp string) (user pmbulbi.Pendaftaran, err error) {
 	err = conn.WithContext(ctx).
-		Where("email_mhs = ?", email).
+		Where("email_mhs = ? AND hp_mhs = ?", email, nohp).
 		First(&user).
 		Error
 	return user, err
