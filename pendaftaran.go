@@ -11,9 +11,9 @@ import (
 func Pendaftaran(ctx context.Context, Mariaenv, secret string, val pmbulbi.Pendaftaran) (err error) {
 	conn := CreateMariaGormConnection(Mariaenv)
 
-	_, err = CheckUserExists(conn, ctx, val.EmailMhs)
+	_, err = CheckUserExists(conn, ctx, val.EmailMhs, val.HpMhs)
 	if err == nil {
-		return errors.New("User dengan email yang sama sudah ada")
+		return errors.New("Email dan Nomor HP sudah terdaftar")
 	}
 
 	mypass := GenerateRandomPassword(10)
