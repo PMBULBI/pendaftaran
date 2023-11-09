@@ -64,7 +64,7 @@ func GetAllPendaftaran(ctx context.Context, Mariaenv string) (dataProvinsi []pmb
 			Password:        v.Password,
 			StatusMhs:       v.StatusMhs,
 			UsernameAdmin:   v.UsernameAdmin.String,
-			TglDaftarMhs:    v.TglDaftarMhs,
+			TglDaftarMhs:    carbon.DateTime{v.TglDaftarMhs},
 		})
 	}
 
