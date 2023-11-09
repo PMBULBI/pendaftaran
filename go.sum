@@ -1,7 +1,5 @@
-github.com/PMBULBI/types v0.1.4 h1:BO09kDoymBXBVEpNax5BaWhC3omLUVbeRWXJJMCgWmA=
-github.com/PMBULBI/types v0.1.4/go.mod h1:a45fbAveIqcVXoY4pCrQepLTzEDCkC+k+ZmZMGxPPZw=
-github.com/PMBULBI/types v0.1.5 h1:UZn8zWy+9unSw56Ih7d1PMNNrF9EKFHPMNggp9MemN4=
-github.com/PMBULBI/types v0.1.5/go.mod h1:a45fbAveIqcVXoY4pCrQepLTzEDCkC+k+ZmZMGxPPZw=
+github.com/PMBULBI/types v0.1.7 h1:IIsCpLPySEzxix2fAWlWIh5cS3j6BBUDELER0xXSPco=
+github.com/PMBULBI/types v0.1.7/go.mod h1:a45fbAveIqcVXoY4pCrQepLTzEDCkC+k+ZmZMGxPPZw=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
