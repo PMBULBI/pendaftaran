@@ -23,3 +23,11 @@ func GetSatuPendaftar(conn *gorm.DB, ctx context.Context, id string) (dest pmbul
 		Error
 	return
 }
+
+func GetAllLevelAdmin(conn *gorm.DB, ctx context.Context) (val []pmbulbi.AdminLevel, err error) {
+	err = conn.
+		WithContext(ctx).
+		Find(&val).
+		Error
+	return
+}
