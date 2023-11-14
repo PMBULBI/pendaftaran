@@ -4,6 +4,7 @@ import (
 	"context"
 	"database/sql"
 	"errors"
+	"github.com/PMBULBI/pendaftaran/Admin"
 	pmbulbi "github.com/PMBULBI/types/schemas"
 	"github.com/golang-module/carbon/v2"
 )
@@ -46,7 +47,7 @@ func Pendaftaran(ctx context.Context, Mariaenv, secret string, val pmbulbi.Penda
 func GetAllPendaftaran(ctx context.Context, Mariaenv string) (dataProvinsi []pmbulbi.ResponsePendaftaran, err error) {
 	conn := CreateMariaGormConnection(Mariaenv)
 
-	val, err := GetAllPendaftar(conn, ctx)
+	val, err := Admin.GetAllPendaftar(conn, ctx)
 
 	if err != nil {
 		return nil, err
@@ -113,7 +114,7 @@ func GetAllKota(ctx context.Context, Mariaenv string) (dataKota []pmbulbi.KotaRe
 func GetOnePendaftar(ctx context.Context, Mariaenv, id string) (data pmbulbi.ResponsePendaftaran, err error) {
 	conn := CreateMariaGormConnection(Mariaenv)
 
-	user, err := GetSatuPendaftar(conn, ctx, id)
+	user, err := Admin.GetSatuPendaftar(conn, ctx, id)
 	if err != nil {
 		return pmbulbi.ResponsePendaftaran{}, err
 	}
