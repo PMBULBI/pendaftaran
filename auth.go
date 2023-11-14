@@ -27,6 +27,10 @@ func (r *Repository) GetByPhoneNumPass(ctx context.Context, email, password stri
 	return
 }
 
+func (r *Repository) CheckIfUserExist(ctx context.Context, email, phoneNum string) (data schemas.Pendaftaran, err error) {
+	return CheckUserExists(r.db, ctx, email, phoneNum)
+}
+
 func NewRepository(db *gorm.DB) *Repository {
 	return &Repository{
 		db: db,
