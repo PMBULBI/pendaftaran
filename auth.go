@@ -25,5 +25,10 @@ func (r *Repository) GetByPhoneNumPass(ctx context.Context, email, password stri
 		First(&data).
 		Error
 	return
+}
 
+func NewRepository(db *gorm.DB) *Repository {
+	return &Repository{
+		db: db,
+	}
 }
