@@ -13,3 +13,12 @@ func GetAllAdmin(conn *gorm.DB, ctx context.Context) (val []pmbulbi.Admin, err e
 		Error
 	return
 }
+
+func GetOneAdmin(conn *gorm.DB, ctx context.Context, id string) (val pmbulbi.Admin, err error) {
+	err = conn.
+		WithContext(ctx).
+		Where("id_admin = ? ", id).
+		First(&val).
+		Error
+	return
+}
