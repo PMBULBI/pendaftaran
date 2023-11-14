@@ -27,7 +27,7 @@ func (r *Repository) GetByPhoneNumPass(ctx context.Context, phoneNum, password s
 	return
 }
 
-func (r *Repository) CheckIfUserExist(ctx context.Context, email, phoneNum string) (data schemas.Pendaftaran, err error) {
+func (r *Repository) CheckUserExists(ctx context.Context, email, phoneNum string) (data schemas.Pendaftaran, err error) {
 	return CheckUserExists(r.db, ctx, email, phoneNum)
 }
 
