@@ -69,6 +69,7 @@ func GetKota(conn *gorm.DB, ctx context.Context) (val []pmbulbi.WilayahKota, err
 func GetAllPendaftar(conn *gorm.DB, ctx context.Context) (val []pmbulbi.Pendaftaran, err error) {
 	err = conn.
 		WithContext(ctx).
+		Order("id DESC").
 		Find(&val).
 		Error
 	return
