@@ -31,3 +31,14 @@ func GetAllAdm(ctx context.Context, Mariaenv string) (dataLvlAdm []pmbulbi.Admin
 
 	return dataLvlAdm, nil
 }
+
+func GetOneAdm(ctx context.Context, Mariaenv, id string) (data pmbulbi.Admin, err error) {
+	conn := pendaftaran.CreateMariaGormConnection(Mariaenv)
+
+	adm, err := GetOneAdmin(conn, ctx, id)
+	if err != nil {
+		return pmbulbi.Admin{}, err
+	}
+
+	return adm, nil
+}
