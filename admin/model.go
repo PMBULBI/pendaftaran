@@ -31,3 +31,12 @@ func GetAllLevelAdmin(conn *gorm.DB, ctx context.Context) (val []pmbulbi.AdminLe
 		Error
 	return
 }
+
+func GetOneLevelAdmin(conn *gorm.DB, ctx context.Context, id string) (val pmbulbi.AdminLevel, err error) {
+	err = conn.
+		WithContext(ctx).
+		Where("id_level = ? ", id).
+		First(&val).
+		Error
+	return
+}
