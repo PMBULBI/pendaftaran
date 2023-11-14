@@ -66,24 +66,6 @@ func GetKota(conn *gorm.DB, ctx context.Context) (val []pmbulbi.WilayahKota, err
 	return
 }
 
-func GetAllPendaftar(conn *gorm.DB, ctx context.Context) (val []pmbulbi.Pendaftaran, err error) {
-	err = conn.
-		WithContext(ctx).
-		Order("id DESC").
-		Find(&val).
-		Error
-	return
-}
-
-func GetSatuPendaftar(conn *gorm.DB, ctx context.Context, id string) (dest pmbulbi.Pendaftaran, err error) {
-	err = conn.
-		WithContext(ctx).
-		Where("id = ? ", id).
-		First(&dest).
-		Error
-	return
-}
-
 func GetKotaLimits(conn *gorm.DB, ctx context.Context, page, perPage int) (val []pmbulbi.WilayahKota, err error) {
 	offset := (page - 1) * perPage
 	err = conn.
