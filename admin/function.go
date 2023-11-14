@@ -76,3 +76,14 @@ func GetAllLevelAdm(ctx context.Context, Mariaenv string) (dataLvlAdm []pmbulbi.
 
 	return dataLvlAdm, nil
 }
+
+func GetOneLevelAdm(ctx context.Context, Mariaenv, id string) (data pmbulbi.AdminLevel, err error) {
+	conn := pendaftaran.CreateMariaGormConnection(Mariaenv)
+
+	lvladm, err := GetOneLevelAdmin(conn, ctx, id)
+	if err != nil {
+		return pmbulbi.AdminLevel{}, err
+	}
+
+	return lvladm, nil
+}
