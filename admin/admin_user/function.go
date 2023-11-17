@@ -86,3 +86,28 @@ func InsertAdm(ctx context.Context, Mariaenv, secret string, val pmbulbi.Admin) 
 	}
 	return
 }
+
+func UpdateAdm(ctx context.Context, Mariaenv, id, secret string, val pmbulbi.Admin) (err error) {
+	conn := pendaftaran.CreateMariaGormConnection(Mariaenv)
+
+	mypass := val.Password
+	passwordencrypted := pendaftaran.Encrypt(mypass, secret)
+
+	data := pmbulbi.Admin{
+		IDAdmin:       val.IDAdmin,
+		NamaAdmin:     val.NamaAdmin,
+		UsernameAdmin: val.UsernameAdmin,
+		Email:         val.Email,
+		NoHp:          val.NoHp,
+		Password:      passwordencrypted,
+		TglBuatAkun:   carbon.Now(),
+		IsAktif:       val.IsAktif,
+		Level:         val.Level,
+	}
+
+	err = UpdateAdmin(conn, ctx, id, data)
+	if err != nil {
+		return err
+	}
+	return
+}
