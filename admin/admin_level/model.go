@@ -30,3 +30,12 @@ func InsertLevelAdmin(conn *gorm.DB, ctx context.Context, val pmbulbi.AdminLevel
 		Error
 	return
 }
+
+func UpdateLevelAdmin(conn *gorm.DB, ctx context.Context, id string, val pmbulbi.AdminLevel) (err error) {
+	err = conn.
+		WithContext(ctx).
+		Where("id_level = ?", id).
+		Updates(&val).
+		Error
+	return
+}
