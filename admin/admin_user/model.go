@@ -39,3 +39,12 @@ func UpdateAdmin(conn *gorm.DB, ctx context.Context, id string, val pmbulbi.Admi
 		Error
 	return
 }
+
+func DeleteAdmin(conn *gorm.DB, ctx context.Context, id string) (err error) {
+	err = conn.
+		WithContext(ctx).
+		Where("id_admin = ?", id).
+		Delete(&pmbulbi.Admin{}).
+		Error
+	return
+}
