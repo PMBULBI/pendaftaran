@@ -39,3 +39,12 @@ func UpdateLevelAdmin(conn *gorm.DB, ctx context.Context, id string, val pmbulbi
 		Error
 	return
 }
+
+func DeleteLevelAdmin(conn *gorm.DB, ctx context.Context, id string) (err error) {
+	err = conn.
+		WithContext(ctx).
+		Where("id_level = ?", id).
+		Delete(&pmbulbi.AdminLevel{}).
+		Error
+	return
+}
