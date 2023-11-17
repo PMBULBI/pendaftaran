@@ -111,3 +111,13 @@ func UpdateAdm(ctx context.Context, Mariaenv, id, secret string, val pmbulbi.Adm
 	}
 	return
 }
+
+func DeleteAdm(ctx context.Context, Mariaenv, id string) (err error) {
+	conn := pendaftaran.CreateMariaGormConnection(Mariaenv)
+
+	err = DeleteAdmin(conn, ctx, id)
+	if err != nil {
+		return err
+	}
+	return
+}
