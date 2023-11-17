@@ -30,3 +30,12 @@ func InsertAdmin(conn *gorm.DB, ctx context.Context, val pmbulbi.Admin) (err err
 		Error
 	return
 }
+
+func UpdateAdmin(conn *gorm.DB, ctx context.Context, id string, val pmbulbi.Admin) (err error) {
+	err = conn.
+		WithContext(ctx).
+		Where("id_admin = ?", id).
+		Updates(&val).
+		Error
+	return
+}
