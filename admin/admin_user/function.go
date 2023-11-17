@@ -5,6 +5,8 @@ import (
 	"github.com/PMBULBI/pendaftaran"
 	pmbulbi "github.com/PMBULBI/types/schemas"
 	"github.com/golang-module/carbon/v2"
+	"math/rand"
+	"time"
 )
 
 func GetAllAdm(ctx context.Context, Mariaenv string) (dataLvlAdm []pmbulbi.Admin, err error) {
@@ -45,9 +47,24 @@ func GetOneAdm(ctx context.Context, Mariaenv, id string) (data pmbulbi.Admin, er
 	return adm, nil
 }
 
+const letterBytes = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+
+func GenerateRandomString(length int) string {
+	rand.NewSource(time.Now().UnixNano())
+
+	stringBytes := make([]byte, length)
+
+	for i := 0; i < length; i++ {
+		stringBytes[i] = letterBytes[rand.Intn(len(letterBytes))]
+	}
+
+	return string(stringBytes)
+}
+
 func InsertAdm(ctx context.Context, Mariaenv, secret string, val pmbulbi.Admin) (err error) {
 	conn := pendaftaran.CreateMariaGormConnection(Mariaenv)
 
+	kodeku := GenerateRandomString(8)
 	mypass := val.Password
 	passwordencrypted := pendaftaran.Encrypt(mypass, secret)
 
@@ -61,7 +78,7 @@ func InsertAdm(ctx context.Context, Mariaenv, secret string, val pmbulbi.Admin) 
 		TglBuatAkun:   carbon.Now(),
 		IsAktif:       val.IsAktif,
 		Level:         val.Level,
-		KodeRef:       val.KodeRef,
+		KodeRef:       kodeku,
 	}
 	err = InsertAdmin(conn, ctx, data)
 	if err != nil {
