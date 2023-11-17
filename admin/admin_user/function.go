@@ -26,6 +26,7 @@ func GetAllAdm(ctx context.Context, Mariaenv string) (dataLvlAdm []pmbulbi.Admin
 			TglBuatAkun:   v.TglBuatAkun,
 			IsAktif:       v.IsAktif,
 			Level:         v.Level,
+			KodeRef:       v.KodeRef,
 		})
 	}
 
