@@ -59,3 +59,13 @@ func UpdateLevelAdm(ctx context.Context, Mariaenv, id string, val pmbulbi.AdminL
 	}
 	return
 }
+
+func DeleteLevelAdm(ctx context.Context, Mariaenv, id string) (err error) {
+	conn := pendaftaran.CreateMariaGormConnection(Mariaenv)
+
+	err = DeleteLevelAdmin(conn, ctx, id)
+	if err != nil {
+		return err
+	}
+	return
+}
