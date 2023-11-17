@@ -10,7 +10,7 @@ import (
 )
 
 func TestPmbdb_TableMigrator(t *testing.T) {
-	Migrate, err := TableMigrator("MARIA`", pmbulbi.WilayahKota{})
+	Migrate, err := TableMigrator("Mariaenv", pmbulbi.Pendaftaran{})
 	fmt.Println(err)
 	fmt.Println(Migrate)
 }
@@ -53,9 +53,10 @@ func TestEncrypt(t *testing.T) {
 func TestPendaftaran(t *testing.T) {
 	insdata := pmbulbi.Pendaftaran{
 		NamaMhs:     "Test",
+		Tahun:       "2024-2025",
 		AsalSekolah: "Bandung High School",
-		EmailMhs:    "Testing@gmail.com",
-		HpMhs:       "62851666465",
+		EmailMhs:    "popopo@gmail.com",
+		HpMhs:       "6285156363",
 		ProvinsiSekolah: sql.NullString{
 			String: "Jawa Barat",
 			Valid:  true,
@@ -70,8 +71,10 @@ func TestPendaftaran(t *testing.T) {
 		},
 		TglDaftarMhs: carbon.Now(),
 	}
-	data := Pendaftaran(context.Background(), "MARIA", "rofiganteng", insdata)
-	fmt.Println(data)
+	koneksyen := CreateMariaGormConnection("Mariaenv")
+	data, err := PendaftaranDecrypt(context.Background(), koneksyen, "secret", insdata)
+	fmt.Printf("%+v\n", data)
+	fmt.Println(err)
 }
 
 func TestGetAllProvinsi(t *testing.T) {
@@ -92,4 +95,19 @@ func TestGetAllKota(t *testing.T) {
 	}
 
 	fmt.Println(data)
+}
+
+func TestGetKotaPage(t *testing.T) {
+	conn := CreateMariaGormConnection("irc:rollyganteng@tcp(10.14.200.17:3307)/pmb_ulbi?parseTime=true")
+	data, err := GetSekolahLimits(conn, context.Background(), 5, "SMAN 3")
+	fmt.Println(err)
+	fmt.Printf("%+v\n", data)
+	fmt.Println(len(data))
+}
+
+func TestGetDaftarSekolahlimit5(t *testing.T) {
+	mariaenv := "irc:rollyganteng@tcp(10.14.200.17:3307)/pmb_ulbi?parseTime=true"
+	data, err := GetDaftarSekolahlimit5(context.Background(), mariaenv, 10, "SMAN 4")
+	fmt.Printf("%+v\n", err)
+	fmt.Printf("%+v\n", data)
 }
