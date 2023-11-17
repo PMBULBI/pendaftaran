@@ -22,3 +22,11 @@ func GetOneAdmin(conn *gorm.DB, ctx context.Context, id string) (val pmbulbi.Adm
 		Error
 	return
 }
+
+func InsertAdmin(conn *gorm.DB, ctx context.Context, val pmbulbi.Admin) (err error) {
+	err = conn.
+		WithContext(ctx).
+		Create(&val).
+		Error
+	return
+}
