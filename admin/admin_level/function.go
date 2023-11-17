@@ -49,3 +49,13 @@ func InsertLevelAdm(ctx context.Context, Mariaenv string, val pmbulbi.AdminLevel
 	}
 	return
 }
+
+func UpdateLevelAdm(ctx context.Context, Mariaenv, id string, val pmbulbi.AdminLevel) (err error) {
+	conn := pendaftaran.CreateMariaGormConnection(Mariaenv)
+
+	err = UpdateLevelAdmin(conn, ctx, id, val)
+	if err != nil {
+		return err
+	}
+	return
+}
