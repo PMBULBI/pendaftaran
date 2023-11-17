@@ -22,3 +22,11 @@ func GetOneLevelAdmin(conn *gorm.DB, ctx context.Context, id string) (val pmbulb
 		Error
 	return
 }
+
+func InsertLevelAdmin(conn *gorm.DB, ctx context.Context, val pmbulbi.AdminLevel) (err error) {
+	err = conn.
+		WithContext(ctx).
+		Create(&val).
+		Error
+	return
+}
