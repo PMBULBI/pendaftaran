@@ -35,3 +35,17 @@ func GetOneLevelAdm(ctx context.Context, Mariaenv, id string) (data pmbulbi.Admi
 
 	return lvladm, nil
 }
+
+func InsertLevelAdm(ctx context.Context, Mariaenv string, val pmbulbi.AdminLevel) (err error) {
+	conn := pendaftaran.CreateMariaGormConnection(Mariaenv)
+
+	data := pmbulbi.AdminLevel{
+		IDLevel:   val.IDLevel,
+		NamaLevel: val.NamaLevel,
+	}
+	err = InsertLevelAdmin(conn, ctx, data)
+	if err != nil {
+		return err
+	}
+	return
+}
