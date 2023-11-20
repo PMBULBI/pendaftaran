@@ -9,10 +9,9 @@ import (
 	"gorm.io/gorm"
 )
 
-func Pendaftaran(ctx context.Context, Mariaenv, secret string, val pmbulbi.Pendaftaran) (err error) {
-	conn := CreateMariaGormConnection(Mariaenv)
+func Pendaftaran(ctx context.Context, Mariaconn *gorm.DB, secret string, val pmbulbi.Pendaftaran) (err error) {
 
-	_, err = CheckUserExists(conn, ctx, val.EmailMhs, val.HpMhs)
+	_, err = CheckUserExists(Mariaconn, ctx, val.EmailMhs, val.HpMhs)
 	if err == nil {
 		return errors.New("Email dan Nomor HP sudah terdaftar")
 	}
@@ -38,7 +37,7 @@ func Pendaftaran(ctx context.Context, Mariaenv, secret string, val pmbulbi.Penda
 			Valid:  val.UsernameAdmin.String != ""},
 		TglDaftarMhs: carbon.Now(),
 	}
-	err = InsertDataPendaftar(conn, ctx, data)
+	err = InsertDataPendaftar(Mariaconn, ctx, data)
 	if err != nil {
 		return err
 	}
