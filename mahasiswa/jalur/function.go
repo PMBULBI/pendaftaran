@@ -26,3 +26,13 @@ func GetAllJalurPendaftaran(ctx context.Context, Mariaconn *gorm.DB) (data []pmb
 
 	return data, nil
 }
+
+func GetOneJalurPendaftaran(ctx context.Context, Mariaconn *gorm.DB, id string) (data pmbulbi.JalurPendaftaran, err error) {
+
+	jalur, err := GetOneJalur(Mariaconn, ctx, id)
+	if err != nil {
+		return pmbulbi.JalurPendaftaran{}, err
+	}
+
+	return jalur, nil
+}
