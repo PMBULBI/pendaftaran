@@ -13,3 +13,11 @@ func InsertBioJalur(conn *gorm.DB, ctx context.Context, val pmbulbi.BiodataJalur
 		Error
 	return
 }
+
+func InsertBioProdi(conn *gorm.DB, ctx context.Context, val pmbulbi.BiodataProdi) (err error) {
+	err = conn.
+		WithContext(ctx).
+		Create(&val).
+		Error
+	return
+}
