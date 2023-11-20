@@ -2,15 +2,13 @@ package pendaftar_sementara
 
 import (
 	"context"
-	"github.com/PMBULBI/pendaftaran"
 	pmbulbi "github.com/PMBULBI/types/schemas"
 	"github.com/golang-module/carbon/v2"
+	"gorm.io/gorm"
 )
 
-func GetAllPendaftaran(ctx context.Context, Mariaenv string) (dataProvinsi []pmbulbi.ResponsePendaftaran, err error) {
-	conn := pendaftaran.CreateMariaGormConnection(Mariaenv)
-
-	val, err := GetAllPendaftar(conn, ctx)
+func GetAllPendaftaran(ctx context.Context, Mariaconn *gorm.DB) (dataProvinsi []pmbulbi.ResponsePendaftaran, err error) {
+	val, err := GetAllPendaftar(Mariaconn, ctx)
 
 	if err != nil {
 		return nil, err
@@ -35,10 +33,8 @@ func GetAllPendaftaran(ctx context.Context, Mariaenv string) (dataProvinsi []pmb
 	return dataProvinsi, nil
 }
 
-func GetOnePendaftar(ctx context.Context, Mariaenv, id string) (data pmbulbi.ResponsePendaftaran, err error) {
-	conn := pendaftaran.CreateMariaGormConnection(Mariaenv)
-
-	user, err := GetSatuPendaftar(conn, ctx, id)
+func GetOnePendaftar(ctx context.Context, Mariaconn *gorm.DB, id string) (data pmbulbi.ResponsePendaftaran, err error) {
+	user, err := GetSatuPendaftar(Mariaconn, ctx, id)
 	if err != nil {
 		return pmbulbi.ResponsePendaftaran{}, err
 	}
