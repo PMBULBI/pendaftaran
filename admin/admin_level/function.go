@@ -2,14 +2,13 @@ package admin_level
 
 import (
 	"context"
-	"github.com/PMBULBI/pendaftaran"
 	pmbulbi "github.com/PMBULBI/types/schemas"
+	"gorm.io/gorm"
 )
 
-func GetAllLevelAdm(ctx context.Context, Mariaenv string) (dataLvlAdm []pmbulbi.AdminLevel, err error) {
-	conn := pendaftaran.CreateMariaGormConnection(Mariaenv)
+func GetAllLevelAdm(ctx context.Context, Mariaconn *gorm.DB) (dataLvlAdm []pmbulbi.AdminLevel, err error) {
 
-	val, err := GetAllLevelAdmin(conn, ctx)
+	val, err := GetAllLevelAdmin(Mariaconn, ctx)
 
 	if err != nil {
 		return nil, err
@@ -25,10 +24,9 @@ func GetAllLevelAdm(ctx context.Context, Mariaenv string) (dataLvlAdm []pmbulbi.
 	return dataLvlAdm, nil
 }
 
-func GetOneLevelAdm(ctx context.Context, Mariaenv, id string) (data pmbulbi.AdminLevel, err error) {
-	conn := pendaftaran.CreateMariaGormConnection(Mariaenv)
+func GetOneLevelAdm(ctx context.Context, Mariaconn *gorm.DB, id string) (data pmbulbi.AdminLevel, err error) {
 
-	lvladm, err := GetOneLevelAdmin(conn, ctx, id)
+	lvladm, err := GetOneLevelAdmin(Mariaconn, ctx, id)
 	if err != nil {
 		return pmbulbi.AdminLevel{}, err
 	}
@@ -36,34 +34,30 @@ func GetOneLevelAdm(ctx context.Context, Mariaenv, id string) (data pmbulbi.Admi
 	return lvladm, nil
 }
 
-func InsertLevelAdm(ctx context.Context, Mariaenv string, val pmbulbi.AdminLevel) (err error) {
-	conn := pendaftaran.CreateMariaGormConnection(Mariaenv)
+func InsertLevelAdm(ctx context.Context, Mariaconn *gorm.DB, val pmbulbi.AdminLevel) (err error) {
 
 	data := pmbulbi.AdminLevel{
 		IDLevel:   val.IDLevel,
 		NamaLevel: val.NamaLevel,
 	}
-	err = InsertLevelAdmin(conn, ctx, data)
+	err = InsertLevelAdmin(Mariaconn, ctx, data)
 	if err != nil {
 		return err
 	}
 	return
 }
 
-func UpdateLevelAdm(ctx context.Context, Mariaenv, id string, val pmbulbi.AdminLevel) (err error) {
-	conn := pendaftaran.CreateMariaGormConnection(Mariaenv)
+func UpdateLevelAdm(ctx context.Context, Mariaconn *gorm.DB, id string, val pmbulbi.AdminLevel) (err error) {
 
-	err = UpdateLevelAdmin(conn, ctx, id, val)
+	err = UpdateLevelAdmin(Mariaconn, ctx, id, val)
 	if err != nil {
 		return err
 	}
 	return
 }
 
-func DeleteLevelAdm(ctx context.Context, Mariaenv, id string) (err error) {
-	conn := pendaftaran.CreateMariaGormConnection(Mariaenv)
-
-	err = DeleteLevelAdmin(conn, ctx, id)
+func DeleteLevelAdm(ctx context.Context, Mariaconn *gorm.DB, id string) (err error) {
+	err = DeleteLevelAdmin(Mariaconn, ctx, id)
 	if err != nil {
 		return err
 	}
