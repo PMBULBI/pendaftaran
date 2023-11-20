@@ -134,10 +134,9 @@ func GetAllKota(ctx context.Context, Mariaconn *gorm.DB) (dataKota []pmbulbi.Kot
 	return dataKota, nil
 }
 
-func GetDaftarSekolahlimit5(ctx context.Context, Mariaenv string, limit int, schoolname string) (data []pmbulbi.DaftarSekolah, err error) {
-	conn := CreateMariaGormConnection(Mariaenv)
+func GetDaftarSekolahlimit5(ctx context.Context, Mariaconn *gorm.DB, limit int, schoolname string) (data []pmbulbi.DaftarSekolah, err error) {
 
-	school, err := GetSekolahLimits(conn, ctx, limit, schoolname)
+	school, err := GetSekolahLimits(Mariaconn, ctx, limit, schoolname)
 	if err != nil {
 		return nil, err
 	}
