@@ -164,10 +164,9 @@ func GetKotaByProvId(ctx context.Context, Mariaconn *gorm.DB, id_prov string) (d
 	return kota, nil
 }
 
-func GetKotaByProvIdKotaNama(ctx context.Context, Mariaenv string, id_prov string, nama_kota string) (data []pmbulbi.WilayahKota, err error) {
-	conn := CreateMariaGormConnection(Mariaenv)
+func GetKotaByProvIdKotaNama(ctx context.Context, Mariaconn *gorm.DB, id_prov string, nama_kota string) (data []pmbulbi.WilayahKota, err error) {
 
-	kota, err := GetKotaByIdProvinsiNamaKota(conn, ctx, id_prov, nama_kota)
+	kota, err := GetKotaByIdProvinsiNamaKota(Mariaconn, ctx, id_prov, nama_kota)
 	if err != nil {
 		return nil, err
 	}
@@ -184,10 +183,9 @@ func VerifyPassword(user pmbulbi.Pendaftaran, secret string, val pmbulbi.Request
 	return nil
 }
 
-func Login(ctx context.Context, Mariaenv, secret string, val pmbulbi.RequestLogin) (err error) {
-	conn := CreateMariaGormConnection(Mariaenv)
+func Login(ctx context.Context, Mariaconn *gorm.DB, secret string, val pmbulbi.RequestLogin) (err error) {
 
-	user, err := CheckUserExists(conn, ctx, val.Email, val.Password)
+	user, err := CheckUserExists(Mariaconn, ctx, val.Email, val.Password)
 	if err != nil {
 		return errors.New("User tidak terdaftar")
 	}
