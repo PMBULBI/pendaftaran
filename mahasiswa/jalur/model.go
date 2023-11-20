@@ -13,3 +13,12 @@ func GetAllJalur(conn *gorm.DB, ctx context.Context) (val []pmbulbi.JalurPendaft
 		Error
 	return
 }
+
+func GetOneJalur(conn *gorm.DB, ctx context.Context, id string) (val pmbulbi.JalurPendaftaran, err error) {
+	err = conn.
+		WithContext(ctx).
+		Where("id_jalur = ? ", id).
+		First(&val).
+		Error
+	return
+}
