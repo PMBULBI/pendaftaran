@@ -144,10 +144,9 @@ func GetDaftarSekolahlimit5(ctx context.Context, Mariaconn *gorm.DB, limit int, 
 	return school, nil
 }
 
-func GetProvinsiNama(ctx context.Context, Mariaenv string, provname string) (data []pmbulbi.WilayahProvinsi, err error) {
-	conn := CreateMariaGormConnection(Mariaenv)
+func GetProvinsiNama(ctx context.Context, Mariaconn *gorm.DB, provname string) (data []pmbulbi.WilayahProvinsi, err error) {
 
-	provinsi, err := GetProvNama(conn, ctx, provname)
+	provinsi, err := GetProvNama(Mariaconn, ctx, provname)
 	if err != nil {
 		return nil, err
 	}
