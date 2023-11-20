@@ -5,14 +5,13 @@ import (
 	"github.com/PMBULBI/pendaftaran"
 	pmbulbi "github.com/PMBULBI/types/schemas"
 	"github.com/golang-module/carbon/v2"
+	"gorm.io/gorm"
 	"math/rand"
 	"time"
 )
 
-func GetAllAdm(ctx context.Context, Mariaenv string) (dataLvlAdm []pmbulbi.Admin, err error) {
-	conn := pendaftaran.CreateMariaGormConnection(Mariaenv)
-
-	val, err := GetAllAdmin(conn, ctx)
+func GetAllAdm(ctx context.Context, Mariaconn *gorm.DB) (dataLvlAdm []pmbulbi.Admin, err error) {
+	val, err := GetAllAdmin(Mariaconn, ctx)
 
 	if err != nil {
 		return nil, err
@@ -36,10 +35,9 @@ func GetAllAdm(ctx context.Context, Mariaenv string) (dataLvlAdm []pmbulbi.Admin
 	return dataLvlAdm, nil
 }
 
-func GetOneAdm(ctx context.Context, Mariaenv, id string) (data pmbulbi.Admin, err error) {
-	conn := pendaftaran.CreateMariaGormConnection(Mariaenv)
+func GetOneAdm(ctx context.Context, Mariaconn *gorm.DB, id string) (data pmbulbi.Admin, err error) {
 
-	adm, err := GetOneAdmin(conn, ctx, id)
+	adm, err := GetOneAdmin(Mariaconn, ctx, id)
 	if err != nil {
 		return pmbulbi.Admin{}, err
 	}
@@ -61,9 +59,7 @@ func GenerateRandomString(length int) string {
 	return string(stringBytes)
 }
 
-func InsertAdm(ctx context.Context, Mariaenv, secret string, val pmbulbi.Admin) (err error) {
-	conn := pendaftaran.CreateMariaGormConnection(Mariaenv)
-
+func InsertAdm(ctx context.Context, Mariaconn *gorm.DB, secret string, val pmbulbi.Admin) (err error) {
 	kodeku := GenerateRandomString(8)
 	mypass := val.Password
 	passwordencrypted := pendaftaran.Encrypt(mypass, secret)
@@ -80,16 +76,14 @@ func InsertAdm(ctx context.Context, Mariaenv, secret string, val pmbulbi.Admin) 
 		Level:         val.Level,
 		KodeRef:       kodeku,
 	}
-	err = InsertAdmin(conn, ctx, data)
+	err = InsertAdmin(Mariaconn, ctx, data)
 	if err != nil {
 		return err
 	}
 	return
 }
 
-func UpdateAdm(ctx context.Context, Mariaenv, id, secret string, val pmbulbi.Admin) (err error) {
-	conn := pendaftaran.CreateMariaGormConnection(Mariaenv)
-
+func UpdateAdm(ctx context.Context, Mariaconn *gorm.DB, id, secret string, val pmbulbi.Admin) (err error) {
 	mypass := val.Password
 	passwordencrypted := pendaftaran.Encrypt(mypass, secret)
 
@@ -105,17 +99,15 @@ func UpdateAdm(ctx context.Context, Mariaenv, id, secret string, val pmbulbi.Adm
 		Level:         val.Level,
 	}
 
-	err = UpdateAdmin(conn, ctx, id, data)
+	err = UpdateAdmin(Mariaconn, ctx, id, data)
 	if err != nil {
 		return err
 	}
 	return
 }
 
-func DeleteAdm(ctx context.Context, Mariaenv, id string) (err error) {
-	conn := pendaftaran.CreateMariaGormConnection(Mariaenv)
-
-	err = DeleteAdmin(conn, ctx, id)
+func DeleteAdm(ctx context.Context, Mariaconn *gorm.DB, id string) (err error) {
+	err = DeleteAdmin(Mariaconn, ctx, id)
 	if err != nil {
 		return err
 	}
