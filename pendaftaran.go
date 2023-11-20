@@ -154,10 +154,9 @@ func GetProvinsiNama(ctx context.Context, Mariaconn *gorm.DB, provname string) (
 	return provinsi, nil
 }
 
-func GetKotaByProvId(ctx context.Context, Mariaenv string, id_prov string) (data []pmbulbi.WilayahKota, err error) {
-	conn := CreateMariaGormConnection(Mariaenv)
+func GetKotaByProvId(ctx context.Context, Mariaconn *gorm.DB, id_prov string) (data []pmbulbi.WilayahKota, err error) {
 
-	kota, err := GetKotaByIdProvinsi(conn, ctx, id_prov)
+	kota, err := GetKotaByIdProvinsi(Mariaconn, ctx, id_prov)
 	if err != nil {
 		return nil, err
 	}
