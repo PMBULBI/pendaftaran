@@ -97,10 +97,9 @@ func PendaftaranDecrypt(ctx context.Context, Mariaconn *gorm.DB, secret string, 
 	return
 }
 
-func GetAllProvinsi(ctx context.Context, Mariaenv string) (dataProvinsi []pmbulbi.ProvinsiResponse, err error) {
-	conn := CreateMariaGormConnection(Mariaenv)
+func GetAllProvinsi(ctx context.Context, Mariaconn *gorm.DB) (dataProvinsi []pmbulbi.ProvinsiResponse, err error) {
 
-	val, err := GetProvinsi(conn, ctx)
+	val, err := GetProvinsi(Mariaconn, ctx)
 
 	if err != nil {
 		return nil, err
@@ -116,10 +115,9 @@ func GetAllProvinsi(ctx context.Context, Mariaenv string) (dataProvinsi []pmbulb
 	return dataProvinsi, nil
 }
 
-func GetAllKota(ctx context.Context, Mariaenv string) (dataKota []pmbulbi.KotaResponse, err error) {
-	conn := CreateMariaGormConnection(Mariaenv)
+func GetAllKota(ctx context.Context, Mariaconn *gorm.DB) (dataKota []pmbulbi.KotaResponse, err error) {
 
-	val, err := GetKota(conn, ctx)
+	val, err := GetKota(Mariaconn, ctx)
 
 	if err != nil {
 		return nil, err
