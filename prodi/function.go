@@ -25,3 +25,13 @@ func GetAllProdi(ctx context.Context, Mariaconn *gorm.DB) (data []pmbulbi.Progra
 
 	return data, nil
 }
+
+func GetOneProdi(ctx context.Context, Mariaconn *gorm.DB, id string) (data pmbulbi.ProgramStudi, err error) {
+
+	prodi, err := GetMOneProdi(Mariaconn, ctx, id)
+	if err != nil {
+		return pmbulbi.ProgramStudi{}, err
+	}
+
+	return prodi, nil
+}
