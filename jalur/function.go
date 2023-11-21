@@ -6,9 +6,9 @@ import (
 	"gorm.io/gorm"
 )
 
-func GetAllJalurPendaftaran(ctx context.Context, Mariaconn *gorm.DB) (data []pmbulbi.JalurPendaftaran, err error) {
+func GetAllJalur(ctx context.Context, Mariaconn *gorm.DB) (data []pmbulbi.JalurPendaftaran, err error) {
 
-	val, err := GetAllJalur(Mariaconn, ctx)
+	val, err := GetMAllJalur(Mariaconn, ctx)
 
 	if err != nil {
 		return nil, err
@@ -27,9 +27,9 @@ func GetAllJalurPendaftaran(ctx context.Context, Mariaconn *gorm.DB) (data []pmb
 	return data, nil
 }
 
-func GetOneJalurPendaftaran(ctx context.Context, Mariaconn *gorm.DB, id string) (data pmbulbi.JalurPendaftaran, err error) {
+func GetOneJalur(ctx context.Context, Mariaconn *gorm.DB, id string) (data pmbulbi.JalurPendaftaran, err error) {
 
-	jalur, err := GetOneJalur(Mariaconn, ctx, id)
+	jalur, err := GetMOneJalur(Mariaconn, ctx, id)
 	if err != nil {
 		return pmbulbi.JalurPendaftaran{}, err
 	}
