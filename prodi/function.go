@@ -35,3 +35,18 @@ func GetOneProdi(ctx context.Context, Mariaconn *gorm.DB, id string) (data pmbul
 
 	return prodi, nil
 }
+
+func InsertProdi(ctx context.Context, Mariaconn *gorm.DB, val pmbulbi.ProgramStudi) (err error) {
+
+	data := pmbulbi.ProgramStudi{
+		ID:               val.ID,
+		Fakultas:         val.Fakultas,
+		KodeProgramStudi: val.KodeProgramStudi,
+		ProgramStudi:     val.ProgramStudi,
+	}
+	err = InsProdi(Mariaconn, ctx, data)
+	if err != nil {
+		return err
+	}
+	return
+}
