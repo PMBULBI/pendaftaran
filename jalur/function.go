@@ -38,15 +38,7 @@ func GetOneJalur(ctx context.Context, Mariaconn *gorm.DB, id string) (data pmbul
 }
 
 func InsertJalur(ctx context.Context, Mariaconn *gorm.DB, val pmbulbi.JalurPendaftaran) (err error) {
-
-	data := pmbulbi.JalurPendaftaran{
-		IDJalur:         val.IDJalur,
-		Jalur:           val.Jalur,
-		NamaJalur:       val.NamaJalur,
-		KeteranganJalur: val.KeteranganJalur,
-		Status:          val.Status,
-	}
-	err = InsJalur(Mariaconn, ctx, data)
+	err = InsJalur(Mariaconn, ctx, val)
 	if err != nil {
 		return err
 	}
@@ -54,16 +46,7 @@ func InsertJalur(ctx context.Context, Mariaconn *gorm.DB, val pmbulbi.JalurPenda
 }
 
 func UpdateJalur(ctx context.Context, Mariaconn *gorm.DB, id string, val pmbulbi.JalurPendaftaran) (err error) {
-
-	data := pmbulbi.JalurPendaftaran{
-		IDJalur:         val.IDJalur,
-		Jalur:           val.Jalur,
-		NamaJalur:       val.NamaJalur,
-		KeteranganJalur: val.KeteranganJalur,
-		Status:          val.Status,
-	}
-
-	err = UpdJalur(Mariaconn, ctx, id, data)
+	err = UpdJalur(Mariaconn, ctx, id, val)
 	if err != nil {
 		return err
 	}
