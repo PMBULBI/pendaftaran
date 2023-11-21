@@ -39,3 +39,12 @@ func UpdProdi(conn *gorm.DB, ctx context.Context, id string, val pmbulbi.Program
 		Error
 	return
 }
+
+func DelProdi(conn *gorm.DB, ctx context.Context, id string) (err error) {
+	err = conn.
+		WithContext(ctx).
+		Where("kode_program_studi = ?", id).
+		Delete(&pmbulbi.ProgramStudi{}).
+		Error
+	return
+}
