@@ -45,3 +45,13 @@ func InsertBioSekolah(conn *gorm.DB, ctx context.Context, val pmbulbi.BiodataDat
 		Error
 	return
 }
+
+func UpdateDataDiri(conn *gorm.DB, ctx context.Context, val pmbulbi.BiodataDataDiri) (err error) {
+	err = conn.
+		WithContext(ctx).
+		Where("id_hash = ?", val.IdHash).
+		Updates(val).
+		Error
+
+	return
+}
