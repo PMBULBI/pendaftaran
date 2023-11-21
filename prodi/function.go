@@ -37,14 +37,7 @@ func GetOneProdi(ctx context.Context, Mariaconn *gorm.DB, id string) (data pmbul
 }
 
 func InsertProdi(ctx context.Context, Mariaconn *gorm.DB, val pmbulbi.ProgramStudi) (err error) {
-
-	data := pmbulbi.ProgramStudi{
-		ID:               val.ID,
-		Fakultas:         val.Fakultas,
-		KodeProgramStudi: val.KodeProgramStudi,
-		ProgramStudi:     val.ProgramStudi,
-	}
-	err = InsProdi(Mariaconn, ctx, data)
+	err = InsProdi(Mariaconn, ctx, val)
 	if err != nil {
 		return err
 	}
@@ -52,15 +45,7 @@ func InsertProdi(ctx context.Context, Mariaconn *gorm.DB, val pmbulbi.ProgramStu
 }
 
 func UpdateProdi(ctx context.Context, Mariaconn *gorm.DB, id string, val pmbulbi.ProgramStudi) (err error) {
-
-	data := pmbulbi.ProgramStudi{
-		ID:               val.ID,
-		Fakultas:         val.Fakultas,
-		KodeProgramStudi: val.KodeProgramStudi,
-		ProgramStudi:     val.ProgramStudi,
-	}
-
-	err = UpdProdi(Mariaconn, ctx, id, data)
+	err = UpdProdi(Mariaconn, ctx, id, val)
 	if err != nil {
 		return err
 	}
