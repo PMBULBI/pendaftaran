@@ -13,3 +13,12 @@ func GetMAllFakultas(conn *gorm.DB, ctx context.Context) (val []pmbulbi.Fakultas
 		Error
 	return
 }
+
+func GetMOneFakultas(conn *gorm.DB, ctx context.Context, id string) (val pmbulbi.Fakultas, err error) {
+	err = conn.
+		WithContext(ctx).
+		Where("id_fakultas = ? ", id).
+		First(&val).
+		Error
+	return
+}
