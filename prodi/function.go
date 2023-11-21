@@ -66,3 +66,11 @@ func UpdateProdi(ctx context.Context, Mariaconn *gorm.DB, id string, val pmbulbi
 	}
 	return
 }
+
+func DeleteProdi(ctx context.Context, Mariaconn *gorm.DB, id string) (err error) {
+	err = DelProdi(Mariaconn, ctx, id)
+	if err != nil {
+		return err
+	}
+	return
+}
