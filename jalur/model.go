@@ -30,3 +30,12 @@ func InsJalur(conn *gorm.DB, ctx context.Context, val pmbulbi.JalurPendaftaran) 
 		Error
 	return
 }
+
+func UpdJalur(conn *gorm.DB, ctx context.Context, id string, val pmbulbi.JalurPendaftaran) (err error) {
+	err = conn.
+		WithContext(ctx).
+		Where("id_jalur = ?", id).
+		Updates(&val).
+		Error
+	return
+}
