@@ -6,7 +6,7 @@ import (
 	"gorm.io/gorm"
 )
 
-func GetAllJalur(conn *gorm.DB, ctx context.Context) (val []pmbulbi.JalurPendaftaran, err error) {
+func GetMAllJalur(conn *gorm.DB, ctx context.Context) (val []pmbulbi.JalurPendaftaran, err error) {
 	err = conn.
 		WithContext(ctx).
 		Find(&val).
@@ -14,7 +14,7 @@ func GetAllJalur(conn *gorm.DB, ctx context.Context) (val []pmbulbi.JalurPendaft
 	return
 }
 
-func GetOneJalur(conn *gorm.DB, ctx context.Context, id string) (val pmbulbi.JalurPendaftaran, err error) {
+func GetMOneJalur(conn *gorm.DB, ctx context.Context, id string) (val pmbulbi.JalurPendaftaran, err error) {
 	err = conn.
 		WithContext(ctx).
 		Where("id_jalur = ? ", id).
