@@ -39,3 +39,12 @@ func UpdJalur(conn *gorm.DB, ctx context.Context, id string, val pmbulbi.JalurPe
 		Error
 	return
 }
+
+func DelJalur(conn *gorm.DB, ctx context.Context, id string) (err error) {
+	err = conn.
+		WithContext(ctx).
+		Where("id_jalur = ?", id).
+		Delete(&pmbulbi.JalurPendaftaran{}).
+		Error
+	return
+}
