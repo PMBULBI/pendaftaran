@@ -36,3 +36,19 @@ func GetOneJalurPendaftaran(ctx context.Context, Mariaconn *gorm.DB, id string) 
 
 	return jalur, nil
 }
+
+func InsertJalur(ctx context.Context, Mariaconn *gorm.DB, val pmbulbi.JalurPendaftaran) (err error) {
+
+	data := pmbulbi.JalurPendaftaran{
+		IDJalur:         val.IDJalur,
+		Jalur:           val.Jalur,
+		NamaJalur:       val.NamaJalur,
+		KeteranganJalur: val.KeteranganJalur,
+		Status:          val.Status,
+	}
+	err = InsJalur(Mariaconn, ctx, data)
+	if err != nil {
+		return err
+	}
+	return
+}
