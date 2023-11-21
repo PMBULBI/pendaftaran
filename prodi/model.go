@@ -22,3 +22,11 @@ func GetMOneProdi(conn *gorm.DB, ctx context.Context, id string) (val pmbulbi.Pr
 		Error
 	return
 }
+
+func InsProdi(conn *gorm.DB, ctx context.Context, val pmbulbi.ProgramStudi) (err error) {
+	err = conn.
+		WithContext(ctx).
+		Create(&val).
+		Error
+	return
+}
