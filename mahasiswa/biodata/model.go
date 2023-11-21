@@ -29,7 +29,16 @@ func InsertBioDiri(conn *gorm.DB, ctx context.Context, val pmbulbi.BiodataDataDi
 		Error
 	return
 }
+
 func InsertBioOrtu(conn *gorm.DB, ctx context.Context, val pmbulbi.BiodataDataOrtu) (err error) {
+	err = conn.
+		WithContext(ctx).
+		Create(&val).
+		Error
+	return
+}
+
+func InsertBioSekolah(conn *gorm.DB, ctx context.Context, val pmbulbi.BiodataDataSekolah) (err error) {
 	err = conn.
 		WithContext(ctx).
 		Create(&val).
