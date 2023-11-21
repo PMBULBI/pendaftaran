@@ -50,3 +50,19 @@ func InsertProdi(ctx context.Context, Mariaconn *gorm.DB, val pmbulbi.ProgramStu
 	}
 	return
 }
+
+func UpdateProdi(ctx context.Context, Mariaconn *gorm.DB, id string, val pmbulbi.ProgramStudi) (err error) {
+
+	data := pmbulbi.ProgramStudi{
+		ID:               val.ID,
+		Fakultas:         val.Fakultas,
+		KodeProgramStudi: val.KodeProgramStudi,
+		ProgramStudi:     val.ProgramStudi,
+	}
+
+	err = UpdProdi(Mariaconn, ctx, id, data)
+	if err != nil {
+		return err
+	}
+	return
+}
