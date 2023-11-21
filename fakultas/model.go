@@ -39,3 +39,12 @@ func UpdFakultas(conn *gorm.DB, ctx context.Context, id string, val pmbulbi.Faku
 		Error
 	return
 }
+
+func DelFakultas(conn *gorm.DB, ctx context.Context, id string) (err error) {
+	err = conn.
+		WithContext(ctx).
+		Where("id_fakultas = ?", id).
+		Delete(&pmbulbi.Fakultas{}).
+		Error
+	return
+}
