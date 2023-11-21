@@ -37,3 +37,11 @@ func InsertBiodataSekolah(ctx context.Context, Mariaconn *gorm.DB, val pmbulbi.B
 	}
 	return
 }
+
+func InsertBiodataOrtu(ctx context.Context, Mariaconn *gorm.DB, val pmbulbi.BiodataDataOrtu) (err error) {
+	err = InsertBioOrtu(Mariaconn, ctx, val)
+	if err != nil {
+		return err
+	}
+	return
+}
