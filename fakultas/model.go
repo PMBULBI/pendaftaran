@@ -22,3 +22,11 @@ func GetMOneFakultas(conn *gorm.DB, ctx context.Context, id string) (val pmbulbi
 		Error
 	return
 }
+
+func InsFakultas(conn *gorm.DB, ctx context.Context, val pmbulbi.Fakultas) (err error) {
+	err = conn.
+		WithContext(ctx).
+		Create(&val).
+		Error
+	return
+}
