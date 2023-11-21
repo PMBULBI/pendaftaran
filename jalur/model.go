@@ -22,3 +22,11 @@ func GetOneJalur(conn *gorm.DB, ctx context.Context, id string) (val pmbulbi.Jal
 		Error
 	return
 }
+
+func InsJalur(conn *gorm.DB, ctx context.Context, val pmbulbi.JalurPendaftaran) (err error) {
+	err = conn.
+		WithContext(ctx).
+		Create(&val).
+		Error
+	return
+}
