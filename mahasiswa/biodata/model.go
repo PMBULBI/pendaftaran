@@ -21,3 +21,11 @@ func InsertBioProdi(conn *gorm.DB, ctx context.Context, val pmbulbi.BiodataProdi
 		Error
 	return
 }
+
+func InsertBioDiri(conn *gorm.DB, ctx context.Context, val pmbulbi.BiodataDataDiri) (err error) {
+	err = conn.
+		WithContext(ctx).
+		Create(&val).
+		Error
+	return
+}
