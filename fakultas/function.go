@@ -35,12 +35,7 @@ func GetOneFakultas(ctx context.Context, Mariaconn *gorm.DB, id string) (data pm
 }
 
 func InsertFakultas(ctx context.Context, Mariaconn *gorm.DB, val pmbulbi.Fakultas) (err error) {
-
-	data := pmbulbi.Fakultas{
-		IDFakultas:   val.IDFakultas,
-		NamaFakultas: val.NamaFakultas,
-	}
-	err = InsFakultas(Mariaconn, ctx, data)
+	err = InsFakultas(Mariaconn, ctx, val)
 	if err != nil {
 		return err
 	}
@@ -48,13 +43,7 @@ func InsertFakultas(ctx context.Context, Mariaconn *gorm.DB, val pmbulbi.Fakulta
 }
 
 func UpdateFakultas(ctx context.Context, Mariaconn *gorm.DB, id string, val pmbulbi.Fakultas) (err error) {
-
-	data := pmbulbi.Fakultas{
-		IDFakultas:   val.IDFakultas,
-		NamaFakultas: val.NamaFakultas,
-	}
-
-	err = UpdFakultas(Mariaconn, ctx, id, data)
+	err = UpdFakultas(Mariaconn, ctx, id, val)
 	if err != nil {
 		return err
 	}
