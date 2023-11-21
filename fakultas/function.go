@@ -33,3 +33,16 @@ func GetOneFakultas(ctx context.Context, Mariaconn *gorm.DB, id string) (data pm
 
 	return fakultas, nil
 }
+
+func InsertFakultas(ctx context.Context, Mariaconn *gorm.DB, val pmbulbi.Fakultas) (err error) {
+
+	data := pmbulbi.Fakultas{
+		IDFakultas:   val.IDFakultas,
+		NamaFakultas: val.NamaFakultas,
+	}
+	err = InsFakultas(Mariaconn, ctx, data)
+	if err != nil {
+		return err
+	}
+	return
+}
