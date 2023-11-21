@@ -69,3 +69,11 @@ func UpdateJalur(ctx context.Context, Mariaconn *gorm.DB, id string, val pmbulbi
 	}
 	return
 }
+
+func DeleteJalur(ctx context.Context, Mariaconn *gorm.DB, id string) (err error) {
+	err = DelJalur(Mariaconn, ctx, id)
+	if err != nil {
+		return err
+	}
+	return
+}
