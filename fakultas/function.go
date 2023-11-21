@@ -46,3 +46,17 @@ func InsertFakultas(ctx context.Context, Mariaconn *gorm.DB, val pmbulbi.Fakulta
 	}
 	return
 }
+
+func UpdateFakultas(ctx context.Context, Mariaconn *gorm.DB, id string, val pmbulbi.Fakultas) (err error) {
+
+	data := pmbulbi.Fakultas{
+		IDFakultas:   val.IDFakultas,
+		NamaFakultas: val.NamaFakultas,
+	}
+
+	err = UpdFakultas(Mariaconn, ctx, id, data)
+	if err != nil {
+		return err
+	}
+	return
+}
