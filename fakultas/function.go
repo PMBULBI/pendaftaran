@@ -60,3 +60,11 @@ func UpdateFakultas(ctx context.Context, Mariaconn *gorm.DB, id string, val pmbu
 	}
 	return
 }
+
+func DeleteFakultas(ctx context.Context, Mariaconn *gorm.DB, id string) (err error) {
+	err = DelFakultas(Mariaconn, ctx, id)
+	if err != nil {
+		return err
+	}
+	return
+}
