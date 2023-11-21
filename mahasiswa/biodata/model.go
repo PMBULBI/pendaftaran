@@ -50,8 +50,17 @@ func UpdateDataDiri(conn *gorm.DB, ctx context.Context, val pmbulbi.BiodataDataD
 	err = conn.
 		WithContext(ctx).
 		Where("id_hash = ?", val.IdHash).
-		Updates(val).
+		Updates(&val).
 		Error
 
+	return
+}
+
+func UpdateDataSekolah(conn *gorm.DB, ctx context.Context, val pmbulbi.BiodataDataSekolah) (err error) {
+	err = conn.
+		WithContext(ctx).
+		Where("id_hash = ?", val.IdHash).
+		Updates(&val).
+		Error
 	return
 }
