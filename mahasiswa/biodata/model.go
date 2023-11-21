@@ -64,3 +64,12 @@ func UpdateDataSekolah(conn *gorm.DB, ctx context.Context, val pmbulbi.BiodataDa
 		Error
 	return
 }
+
+func UpdateDataOrtu(conn *gorm.DB, ctx context.Context, val pmbulbi.BiodataDataOrtu) (err error) {
+	err = conn.
+		WithContext(ctx).
+		Where("id_hash = ?", val.IdHash).
+		Updates(&val).
+		Error
+	return
+}
