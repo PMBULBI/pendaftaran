@@ -30,3 +30,12 @@ func InsFakultas(conn *gorm.DB, ctx context.Context, val pmbulbi.Fakultas) (err 
 		Error
 	return
 }
+
+func UpdFakultas(conn *gorm.DB, ctx context.Context, id string, val pmbulbi.Fakultas) (err error) {
+	err = conn.
+		WithContext(ctx).
+		Where("id_fakultas = ?", id).
+		Updates(&val).
+		Error
+	return
+}
