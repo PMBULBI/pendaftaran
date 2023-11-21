@@ -13,3 +13,12 @@ func GetMAllProdi(conn *gorm.DB, ctx context.Context) (val []pmbulbi.ProgramStud
 		Error
 	return
 }
+
+func GetMOneProdi(conn *gorm.DB, ctx context.Context, id string) (val pmbulbi.ProgramStudi, err error) {
+	err = conn.
+		WithContext(ctx).
+		Where("kode_program_studi = ? ", id).
+		First(&val).
+		Error
+	return
+}
