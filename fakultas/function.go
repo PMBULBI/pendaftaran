@@ -23,3 +23,13 @@ func GetAllFakultas(ctx context.Context, Mariaconn *gorm.DB) (data []pmbulbi.Fak
 
 	return data, nil
 }
+
+func GetOneFakultas(ctx context.Context, Mariaconn *gorm.DB, id string) (data pmbulbi.Fakultas, err error) {
+
+	fakultas, err := GetMOneFakultas(Mariaconn, ctx, id)
+	if err != nil {
+		return pmbulbi.Fakultas{}, err
+	}
+
+	return fakultas, nil
+}
