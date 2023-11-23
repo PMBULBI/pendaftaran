@@ -31,8 +31,8 @@ func (r *Repository) Insert(ctx context.Context, val pmbulbi.ProgramStudi) (err 
 	return
 }
 
-func UpdProdi(conn *gorm.DB, ctx context.Context, id string, val pmbulbi.ProgramStudi) (err error) {
-	err = conn.
+func (r *Repository) Update(ctx context.Context, id string, val pmbulbi.ProgramStudi) (err error) {
+	err = r.db.
 		WithContext(ctx).
 		Where("kode_program_studi = ?", id).
 		Updates(&val).
