@@ -39,7 +39,7 @@ func (r *Repository) Update(ctx context.Context, id string, val pmbulbi.Fakultas
 	return
 }
 
-func (r *Repository) DelFakultas(ctx context.Context, id string) (err error) {
+func (r *Repository) Delete(ctx context.Context, id string) (err error) {
 	err = r.db.
 		WithContext(ctx).
 		Where("id_fakultas = ?", id).
