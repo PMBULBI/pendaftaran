@@ -5,7 +5,7 @@ import (
 	pmbulbi "github.com/PMBULBI/types/schemas"
 )
 
-func (r *Level) Fetch(ctx context.Context) (val []pmbulbi.AdminLevel, err error) {
+func (r *LevelRepository) Fetch(ctx context.Context) (val []pmbulbi.AdminLevel, err error) {
 	err = r.db.
 		WithContext(ctx).
 		Find(&val).
@@ -13,7 +13,7 @@ func (r *Level) Fetch(ctx context.Context) (val []pmbulbi.AdminLevel, err error)
 	return
 }
 
-func (r *Level) GetById(ctx context.Context, id string) (val pmbulbi.AdminLevel, err error) {
+func (r *LevelRepository) GetById(ctx context.Context, id string) (val pmbulbi.AdminLevel, err error) {
 	err = r.db.
 		WithContext(ctx).
 		Where("id_level = ? ", id).
@@ -22,7 +22,7 @@ func (r *Level) GetById(ctx context.Context, id string) (val pmbulbi.AdminLevel,
 	return
 }
 
-func (r *Level) Insert(ctx context.Context, val pmbulbi.AdminLevel) (err error) {
+func (r *LevelRepository) Insert(ctx context.Context, val pmbulbi.AdminLevel) (err error) {
 	err = r.db.
 		WithContext(ctx).
 		Create(&val).
@@ -30,7 +30,7 @@ func (r *Level) Insert(ctx context.Context, val pmbulbi.AdminLevel) (err error) 
 	return
 }
 
-func (r *Level) Update(ctx context.Context, id string, val pmbulbi.AdminLevel) (err error) {
+func (r *LevelRepository) Update(ctx context.Context, id string, val pmbulbi.AdminLevel) (err error) {
 	err = r.db.
 		WithContext(ctx).
 		Where("id_level = ?", id).
@@ -39,7 +39,7 @@ func (r *Level) Update(ctx context.Context, id string, val pmbulbi.AdminLevel) (
 	return
 }
 
-func (r *Level) Delete(ctx context.Context, id string) (err error) {
+func (r *LevelRepository) Delete(ctx context.Context, id string) (err error) {
 	err = r.db.
 		WithContext(ctx).
 		Where("id_level = ?", id).
