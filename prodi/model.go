@@ -3,7 +3,6 @@ package prodi
 import (
 	"context"
 	pmbulbi "github.com/PMBULBI/types/schemas"
-	"gorm.io/gorm"
 )
 
 func (r *Repository) Fetch(ctx context.Context) (val []pmbulbi.ProgramStudi, err error) {
@@ -40,8 +39,8 @@ func (r *Repository) Update(ctx context.Context, id string, val pmbulbi.ProgramS
 	return
 }
 
-func DelProdi(conn *gorm.DB, ctx context.Context, id string) (err error) {
-	err = conn.
+func (r *Repository) Delete(ctx context.Context, id string) (err error) {
+	err = r.db.
 		WithContext(ctx).
 		Where("kode_program_studi = ?", id).
 		Delete(&pmbulbi.ProgramStudi{}).
