@@ -22,7 +22,7 @@ func (r *Repository) GetById(ctx context.Context, id string) (val pmbulbi.Fakult
 	return
 }
 
-func (r *Repository) InsFakultas(ctx context.Context, val pmbulbi.Fakultas) (err error) {
+func (r *Repository) Insert(ctx context.Context, val pmbulbi.Fakultas) (err error) {
 	err = r.db.
 		WithContext(ctx).
 		Create(&val).
