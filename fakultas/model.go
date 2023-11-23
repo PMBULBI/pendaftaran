@@ -30,7 +30,7 @@ func (r *Repository) Insert(ctx context.Context, val pmbulbi.Fakultas) (err erro
 	return
 }
 
-func (r *Repository) UpdFakultas(ctx context.Context, id string, val pmbulbi.Fakultas) (err error) {
+func (r *Repository) Update(ctx context.Context, id string, val pmbulbi.Fakultas) (err error) {
 	err = r.db.
 		WithContext(ctx).
 		Where("id_fakultas = ?", id).
