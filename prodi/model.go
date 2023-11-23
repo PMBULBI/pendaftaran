@@ -6,8 +6,8 @@ import (
 	"gorm.io/gorm"
 )
 
-func GetMAllProdi(conn *gorm.DB, ctx context.Context) (val []pmbulbi.ProgramStudi, err error) {
-	err = conn.
+func (r *Repository) Fetch(ctx context.Context) (val []pmbulbi.ProgramStudi, err error) {
+	err = r.db.
 		WithContext(ctx).
 		Find(&val).
 		Error
