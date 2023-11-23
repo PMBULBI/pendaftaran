@@ -13,7 +13,7 @@ func (r *Repository) Fetch(ctx context.Context) (val []pmbulbi.Fakultas, err err
 	return
 }
 
-func (r *Repository) GetMOneFakultas(ctx context.Context, id string) (val pmbulbi.Fakultas, err error) {
+func (r *Repository) GetById(ctx context.Context, id string) (val pmbulbi.Fakultas, err error) {
 	err = r.db.
 		WithContext(ctx).
 		Where("id_fakultas = ? ", id).
