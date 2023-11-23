@@ -23,8 +23,8 @@ func (r *Repository) GetById(ctx context.Context, id string) (val pmbulbi.Progra
 	return
 }
 
-func InsProdi(conn *gorm.DB, ctx context.Context, val pmbulbi.ProgramStudi) (err error) {
-	err = conn.
+func (r *Repository) Insert(ctx context.Context, val pmbulbi.ProgramStudi) (err error) {
+	err = r.db.
 		WithContext(ctx).
 		Create(&val).
 		Error
