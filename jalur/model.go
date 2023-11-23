@@ -3,19 +3,18 @@ package jalur
 import (
 	"context"
 	pmbulbi "github.com/PMBULBI/types/schemas"
-	"gorm.io/gorm"
 )
 
-func GetMAllJalur(conn *gorm.DB, ctx context.Context) (val []pmbulbi.JalurPendaftaran, err error) {
-	err = conn.
+func (r *Repository) Fetch(ctx context.Context) (val []pmbulbi.JalurPendaftaran, err error) {
+	err = r.db.
 		WithContext(ctx).
 		Find(&val).
 		Error
 	return
 }
 
-func GetMOneJalur(conn *gorm.DB, ctx context.Context, id string) (val pmbulbi.JalurPendaftaran, err error) {
-	err = conn.
+func (r *Repository) GetById(ctx context.Context, id string) (val pmbulbi.JalurPendaftaran, err error) {
+	err = r.db.
 		WithContext(ctx).
 		Where("id_jalur = ? ", id).
 		First(&val).
@@ -23,16 +22,16 @@ func GetMOneJalur(conn *gorm.DB, ctx context.Context, id string) (val pmbulbi.Ja
 	return
 }
 
-func InsJalur(conn *gorm.DB, ctx context.Context, val pmbulbi.JalurPendaftaran) (err error) {
-	err = conn.
+func (r *Repository) Insert(ctx context.Context, val pmbulbi.JalurPendaftaran) (err error) {
+	err = r.db.
 		WithContext(ctx).
 		Create(&val).
 		Error
 	return
 }
 
-func UpdJalur(conn *gorm.DB, ctx context.Context, id string, val pmbulbi.JalurPendaftaran) (err error) {
-	err = conn.
+func (r *Repository) Update(ctx context.Context, id string, val pmbulbi.JalurPendaftaran) (err error) {
+	err = r.db.
 		WithContext(ctx).
 		Where("id_jalur = ?", id).
 		Updates(&val).
@@ -40,8 +39,8 @@ func UpdJalur(conn *gorm.DB, ctx context.Context, id string, val pmbulbi.JalurPe
 	return
 }
 
-func DelJalur(conn *gorm.DB, ctx context.Context, id string) (err error) {
-	err = conn.
+func (r *Repository) Delete(ctx context.Context, id string) (err error) {
+	err = r.db.
 		WithContext(ctx).
 		Where("id_jalur = ?", id).
 		Delete(&pmbulbi.JalurPendaftaran{}).
