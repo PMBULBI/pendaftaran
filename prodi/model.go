@@ -14,8 +14,8 @@ func (r *Repository) Fetch(ctx context.Context) (val []pmbulbi.ProgramStudi, err
 	return
 }
 
-func GetMOneProdi(conn *gorm.DB, ctx context.Context, id string) (val pmbulbi.ProgramStudi, err error) {
-	err = conn.
+func (r *Repository) GetById(ctx context.Context, id string) (val pmbulbi.ProgramStudi, err error) {
+	err = r.db.
 		WithContext(ctx).
 		Where("kode_program_studi = ? ", id).
 		First(&val).
