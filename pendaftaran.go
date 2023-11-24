@@ -117,16 +117,6 @@ func GetKotaByProvId(ctx context.Context, Mariaconn *gorm.DB, id_prov string) (d
 	return kota, nil
 }
 
-func GetKotaByProvIdKotaNama(ctx context.Context, Mariaconn *gorm.DB, id_prov string, nama_kota string) (data []pmbulbi.WilayahKota, err error) {
-
-	kota, err := GetKotaByIdProvinsiNamaKota(Mariaconn, ctx, id_prov, nama_kota)
-	if err != nil {
-		return nil, err
-	}
-
-	return kota, nil
-}
-
 func VerifyPassword(user pmbulbi.Pendaftaran, secret string, val pmbulbi.RequestLogin) error {
 	decryptedPassword := Decrypt(user.Password, secret)
 	if user.EmailMhs != val.Email || decryptedPassword != val.Password {
