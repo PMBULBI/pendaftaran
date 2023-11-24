@@ -97,24 +97,6 @@ func PendaftaranDecrypt(ctx context.Context, Mariaconn *gorm.DB, secret string, 
 	return
 }
 
-func GetAllProvinsi(ctx context.Context, Mariaconn *gorm.DB) (dataProvinsi []pmbulbi.ProvinsiResponse, err error) {
-
-	val, err := GetProvinsi(Mariaconn, ctx)
-
-	if err != nil {
-		return nil, err
-	}
-
-	for _, v := range val {
-		dataProvinsi = append(dataProvinsi, pmbulbi.ProvinsiResponse{
-			IDProvinsi:   v.IDProvinsi,
-			NamaProvinsi: v.NamaProvinsi,
-		})
-	}
-
-	return dataProvinsi, nil
-}
-
 func GetAllKota(ctx context.Context, Mariaconn *gorm.DB) (dataKota []pmbulbi.KotaResponse, err error) {
 
 	val, err := GetKota(Mariaconn, ctx)
@@ -142,16 +124,6 @@ func GetDaftarSekolahlimit5(ctx context.Context, Mariaconn *gorm.DB, limit int, 
 	}
 
 	return school, nil
-}
-
-func GetProvinsiNama(ctx context.Context, Mariaconn *gorm.DB, provname string) (data []pmbulbi.WilayahProvinsi, err error) {
-
-	provinsi, err := GetProvNama(Mariaconn, ctx, provname)
-	if err != nil {
-		return nil, err
-	}
-
-	return provinsi, nil
 }
 
 func GetKotaByProvId(ctx context.Context, Mariaconn *gorm.DB, id_prov string) (data []pmbulbi.WilayahKota, err error) {
