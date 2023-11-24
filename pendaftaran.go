@@ -97,25 +97,6 @@ func PendaftaranDecrypt(ctx context.Context, Mariaconn *gorm.DB, secret string, 
 	return
 }
 
-func GetAllKota(ctx context.Context, Mariaconn *gorm.DB) (dataKota []pmbulbi.KotaResponse, err error) {
-
-	val, err := GetKota(Mariaconn, ctx)
-
-	if err != nil {
-		return nil, err
-	}
-
-	for _, v := range val {
-		dataKota = append(dataKota, pmbulbi.KotaResponse{
-			IDKota:     v.IDKota,
-			IDProvinsi: v.IDProvinsi,
-			NamaKota:   v.NamaKota,
-		})
-	}
-
-	return dataKota, nil
-}
-
 func GetDaftarSekolahlimit5(ctx context.Context, Mariaconn *gorm.DB, limit int, schoolname string) (data []pmbulbi.DaftarSekolah, err error) {
 
 	school, err := GetSekolahLimits(Mariaconn, ctx, limit, schoolname)
