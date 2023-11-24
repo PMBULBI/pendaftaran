@@ -50,14 +50,6 @@ func InsertDataPendaftar(conn *gorm.DB, ctx context.Context, val pmbulbi.Pendaft
 	return
 }
 
-func GetProvinsi(conn *gorm.DB, ctx context.Context) (val []pmbulbi.WilayahProvinsi, err error) {
-	err = conn.
-		WithContext(ctx).
-		Find(&val).
-		Error
-	return
-}
-
 func GetKota(conn *gorm.DB, ctx context.Context) (val []pmbulbi.WilayahKota, err error) {
 	err = conn.
 		WithContext(ctx).
@@ -81,14 +73,6 @@ func GetSekolahLimits(conn *gorm.DB, ctx context.Context, lim int, name string) 
 	err = conn.WithContext(ctx).
 		Limit(lim).
 		Where("nama_sekolah LIKE ?", "%"+name+"%").
-		Find(&dest).
-		Error
-	return
-}
-
-func GetProvNama(conn *gorm.DB, ctx context.Context, prov string) (dest []pmbulbi.WilayahProvinsi, err error) {
-	err = conn.WithContext(ctx).
-		Where("nama_provinsi LIKE ?", "%"+prov+"%").
 		Find(&dest).
 		Error
 	return
