@@ -61,15 +61,6 @@ func GetKotaLimits(conn *gorm.DB, ctx context.Context, page, perPage int) (val [
 	return
 }
 
-func GetSekolahLimits(conn *gorm.DB, ctx context.Context, lim int, name string) (dest []pmbulbi.DaftarSekolah, err error) {
-	err = conn.WithContext(ctx).
-		Limit(lim).
-		Where("nama_sekolah LIKE ?", "%"+name+"%").
-		Find(&dest).
-		Error
-	return
-}
-
 func CheckUserExists(conn *gorm.DB, ctx context.Context, email string, nohp string) (user pmbulbi.Pendaftaran, err error) {
 	err = conn.WithContext(ctx).
 		Where("email_mhs = ? OR hp_mhs = ?", email, nohp).
