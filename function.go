@@ -50,14 +50,6 @@ func InsertDataPendaftar(conn *gorm.DB, ctx context.Context, val pmbulbi.Pendaft
 	return
 }
 
-func GetKota(conn *gorm.DB, ctx context.Context) (val []pmbulbi.WilayahKota, err error) {
-	err = conn.
-		WithContext(ctx).
-		Find(&val).
-		Error
-	return
-}
-
 func GetKotaLimits(conn *gorm.DB, ctx context.Context, page, perPage int) (val []pmbulbi.WilayahKota, err error) {
 	offset := (page - 1) * perPage
 	err = conn.
