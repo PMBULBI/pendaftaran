@@ -107,16 +107,6 @@ func GetDaftarSekolahlimit5(ctx context.Context, Mariaconn *gorm.DB, limit int, 
 	return school, nil
 }
 
-func GetKotaByProvId(ctx context.Context, Mariaconn *gorm.DB, id_prov string) (data []pmbulbi.WilayahKota, err error) {
-
-	kota, err := GetKotaByIdProvinsi(Mariaconn, ctx, id_prov)
-	if err != nil {
-		return nil, err
-	}
-
-	return kota, nil
-}
-
 func VerifyPassword(user pmbulbi.Pendaftaran, secret string, val pmbulbi.RequestLogin) error {
 	decryptedPassword := Decrypt(user.Password, secret)
 	if user.EmailMhs != val.Email || decryptedPassword != val.Password {
