@@ -97,16 +97,6 @@ func PendaftaranDecrypt(ctx context.Context, Mariaconn *gorm.DB, secret string, 
 	return
 }
 
-func GetDaftarSekolahlimit5(ctx context.Context, Mariaconn *gorm.DB, limit int, schoolname string) (data []pmbulbi.DaftarSekolah, err error) {
-
-	school, err := GetSekolahLimits(Mariaconn, ctx, limit, schoolname)
-	if err != nil {
-		return nil, err
-	}
-
-	return school, nil
-}
-
 func VerifyPassword(user pmbulbi.Pendaftaran, secret string, val pmbulbi.RequestLogin) error {
 	decryptedPassword := Decrypt(user.Password, secret)
 	if user.EmailMhs != val.Email || decryptedPassword != val.Password {
