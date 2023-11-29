@@ -30,6 +30,14 @@ func (r *Repository) Insert(ctx context.Context, val pmbulbi.Pendaftaran) (err e
 		Error
 	return
 }
+func (r *Repository) Update(ctx context.Context, id string, data pmbulbi.Pendaftaran) (err error) {
+	err = r.db.
+		WithContext(ctx).
+		Where("id = ?", id).
+		Updates(&data).
+		Error
+	return
+}
 
 func (r *Repository) GetByEmailPass(ctx context.Context, email, password string) (data pmbulbi.Pendaftaran, err error) {
 	err = r.db.WithContext(ctx).
