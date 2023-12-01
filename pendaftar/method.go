@@ -78,3 +78,20 @@ func (r *Repository) GetByEmailOrPhone(ctx context.Context, email, phoneNum stri
 
 	return
 }
+
+func (r *Repository) GetByPhone(ctx context.Context, phoneNum string) (res pmbulbi.Pendaftaran, err error) {
+	err = r.db.WithContext(ctx).
+		Where("hp_mhs = ?", phoneNum).
+		First(&res).
+		Error
+
+	return
+}
+func (r *Repository) GetByEmail(ctx context.Context, email string) (res pmbulbi.Pendaftaran, err error) {
+	err = r.db.WithContext(ctx).
+		Where("email_mhs = ?", email).
+		First(&res).
+		Error
+
+	return
+}
