@@ -68,12 +68,10 @@ func (r *Repository) CheckUserExists(ctx context.Context, email, phoneNum string
 	return
 }
 func (r *Repository) GetByEmailOrPhone(ctx context.Context, email, phoneNum string) (res pmbulbi.Pendaftaran, err error) {
-	err = r.db.WithContext(ctx).
-		Where("email_mhs = ? OR hp_mhs = ?", email, phoneNum).
-		First(&res).
-		Error
+
+	res, err = r.GetByEmail(ctx, email)
 	if err != nil {
-		return
+		res, err = r.GetByPhone(ctx, phoneNum)
 	}
 
 	return
