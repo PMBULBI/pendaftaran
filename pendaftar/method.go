@@ -57,7 +57,7 @@ func (r *Repository) GetByPhoneNumPass(ctx context.Context, email, password stri
 func (r *Repository) CheckUserExists(ctx context.Context, email, phoneNum string) (res bool) {
 	data := pmbulbi.Pendaftaran{}
 	err := r.db.WithContext(ctx).
-		Where("email_mhs = ? AND hp_mhs = ?", email, phoneNum).
+		Where("email_mhs = ? OR hp_mhs = ?", email, phoneNum).
 		First(&data).
 		Error
 	if err != nil {
