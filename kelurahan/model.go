@@ -12,3 +12,12 @@ func (r *Repository) Fetch(ctx context.Context) (val []pmbulbi.WilayahKelurahan,
 		Error
 	return
 }
+
+func (r *Repository) GetKelurahanByIdKecamatan(ctx context.Context, id_kecamatan string) (dest []pmbulbi.WilayahKelurahan, err error) {
+	err = r.db.
+		WithContext(ctx).
+		Where("id_kecamatan LIKE ?", "%"+id_kecamatan+"%").
+		Find(&dest).
+		Error
+	return
+}
