@@ -21,3 +21,12 @@ func (r *Repository) GetKecamatanByIdKota(ctx context.Context, id_kota string) (
 		Error
 	return
 }
+
+func (r *Repository) GetKotaByIdProvinsiNamaKota(ctx context.Context, id_kota, kecamatan string) (dest []pmbulbi.WilayahKecamatan, err error) {
+	err = r.db.
+		WithContext(ctx).
+		Where("id_kota LIKE ? AND nama_kecamatan LIKE ?", "%"+id_kota+"%", "%"+kecamatan+"%").
+		Find(&dest).
+		Error
+	return
+}
