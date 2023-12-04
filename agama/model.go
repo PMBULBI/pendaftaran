@@ -21,3 +21,11 @@ func (r *Repository) GetById(ctx context.Context, id string) (val pmbulbi.Agama,
 		Error
 	return
 }
+
+func (r *Repository) Insert(ctx context.Context, val pmbulbi.Agama) (err error) {
+	err = r.db.
+		WithContext(ctx).
+		Create(&val).
+		Error
+	return
+}
