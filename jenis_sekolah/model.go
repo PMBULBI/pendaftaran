@@ -22,10 +22,19 @@ func (r *Repository) GetById(ctx context.Context, id string) (val pmbulbi.JenisS
 	return
 }
 
-func (r *Repository) Insert(ctx context.Context, val pmbulbi.Pekerjaan) (err error) {
+func (r *Repository) Insert(ctx context.Context, val pmbulbi.JenisSekolah) (err error) {
 	err = r.db.
 		WithContext(ctx).
 		Create(&val).
+		Error
+	return
+}
+
+func (r *Repository) Update(ctx context.Context, id string, val pmbulbi.JenisSekolah) (err error) {
+	err = r.db.
+		WithContext(ctx).
+		Where("id_jenis_sekolah = ?", id).
+		Updates(&val).
 		Error
 	return
 }
