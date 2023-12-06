@@ -38,3 +38,12 @@ func (r *Repository) Update(ctx context.Context, id string, val pmbulbi.JurusanS
 		Error
 	return
 }
+
+func (r *Repository) Delete(ctx context.Context, id string) (err error) {
+	err = r.db.
+		WithContext(ctx).
+		Where("id_jurusan = ?", id).
+		Delete(&pmbulbi.JurusanSekolah{}).
+		Error
+	return
+}
