@@ -74,9 +74,9 @@ func (r *UserRepository) CheckUserExists(ctx context.Context, email, phoneNum st
 }
 
 func (r *UserRepository) GetByEmailOrPhone(ctx context.Context, email, phoneNum string) (data pmbulbi.Admin, err error) {
-	data, err = r.GetByPhone(ctx, email)
+	data, err = r.GetByPhone(ctx, phoneNum)
 	if err != nil {
-		data, err = r.GetByEmail(ctx, phoneNum)
+		data, err = r.GetByEmail(ctx, email)
 	}
 
 	return
