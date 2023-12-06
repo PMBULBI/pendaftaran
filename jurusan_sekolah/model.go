@@ -13,6 +13,15 @@ func (r *Repository) Fetch(ctx context.Context) (val []pmbulbi.JurusanSekolah, e
 	return
 }
 
+func (r *Repository) GetById(ctx context.Context, id string) (val pmbulbi.JurusanSekolah, err error) {
+	err = r.db.
+		WithContext(ctx).
+		Where("id_jurusan = ? ", id).
+		First(&val).
+		Error
+	return
+}
+
 func (r *Repository) GetJurusanByIdJnsSekolah(ctx context.Context, id_jenis_sekolah string) (dest []pmbulbi.JurusanSekolah, err error) {
 	err = r.db.
 		WithContext(ctx).
