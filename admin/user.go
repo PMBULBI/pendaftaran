@@ -72,3 +72,29 @@ func (r *UserRepository) CheckUserExists(ctx context.Context, email, phoneNum st
 		Error
 	return
 }
+
+func (r *UserRepository) GetByEmailOrPhone(ctx context.Context, email, phoneNum string) (data pmbulbi.Admin, err error) {
+	data, err = r.GetByPhone(ctx, email)
+	if err != nil {
+		data, err = r.GetByEmail(ctx, phoneNum)
+	}
+
+	return
+}
+
+func (r *UserRepository) GetByPhone(ctx context.Context, phoneNum string) (data pmbulbi.Admin, err error) {
+	err = r.db.WithContext(ctx).
+		Where("no_hp = ?", phoneNum).
+		First(&data).
+		Error
+	return
+
+}
+
+func (r *UserRepository) GetByEmail(ctx context.Context, email string) (data pmbulbi.Admin, err error) {
+	err = r.db.WithContext(ctx).
+		Where("email = ?", email).
+		First(&data).
+		Error
+	return
+}
