@@ -16,7 +16,7 @@ func (r *Repository) Fetch(ctx context.Context) (val []pmbulbi.WilayahProvinsi, 
 func (r *Repository) GetByNama(ctx context.Context, prov string) (val []pmbulbi.WilayahProvinsi, err error) {
 	err = r.db.
 		WithContext(ctx).
-		Where("nama_provinsi LIKE ?", "%"+prov+"%").
+		Where("nama_provinsi ILIKE ?", "%"+prov+"%").
 		Find(&val).
 		Error
 	return

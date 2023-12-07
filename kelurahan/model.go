@@ -16,7 +16,7 @@ func (r *Repository) Fetch(ctx context.Context) (val []pmbulbi.WilayahKelurahan,
 func (r *Repository) GetKelurahanByIdKecamatan(ctx context.Context, id_kecamatan string) (dest []pmbulbi.WilayahKelurahan, err error) {
 	err = r.db.
 		WithContext(ctx).
-		Where("id_kecamatan LIKE ?", "%"+id_kecamatan+"%").
+		Where("id_kecamatan ILIKE ?", "%"+id_kecamatan+"%").
 		Find(&dest).
 		Error
 	return
@@ -25,7 +25,7 @@ func (r *Repository) GetKelurahanByIdKecamatan(ctx context.Context, id_kecamatan
 func (r *Repository) GetKelurahanByIdKecamatanNamaKelurahan(ctx context.Context, id_kecamatan, kelurahan string) (dest []pmbulbi.WilayahKelurahan, err error) {
 	err = r.db.
 		WithContext(ctx).
-		Where("id_kecamatan LIKE ? AND nama_kelurahan LIKE ?", "%"+id_kecamatan+"%", "%"+kelurahan+"%").
+		Where("id_kecamatan ILIKE ? AND nama_kelurahan ILIKE ?", "%"+id_kecamatan+"%", "%"+kelurahan+"%").
 		Find(&dest).
 		Error
 	return
