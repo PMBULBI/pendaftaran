@@ -42,6 +42,14 @@ func TableMigrator(maria string, model interface{}) (res string, err error) {
 	return
 }
 
+func TableMigratorPostgres(pstgrs string, model ...interface{}) (res string, err error) {
+	err = CreatePostgresConnection(pstgrs).AutoMigrate(model...)
+	if err != nil {
+		return "Gagal Migrate", err
+	}
+	return
+}
+
 func InsertDataPendaftar(conn *gorm.DB, ctx context.Context, val pmbulbi.Pendaftaran) (err error) {
 	err = conn.
 		WithContext(ctx).
