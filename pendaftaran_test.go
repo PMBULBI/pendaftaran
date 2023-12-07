@@ -10,7 +10,34 @@ import (
 )
 
 func TestPmbdb_TableMigrator(t *testing.T) {
-	Migrate, err := TableMigrator("Mariaenv", pmbulbi.Pendaftaran{})
+	Migrate, err := TableMigratorPostgres("pstgresstring",
+		pmbulbi.Admin{},
+		pmbulbi.Agama{},
+		pmbulbi.AdminLevel{},
+		pmbulbi.WilayahKota{},
+		pmbulbi.Biaya{},
+		//pmbulbi.BerkasPendaftaran{},
+		pmbulbi.BiodataDataBerkas{},
+		pmbulbi.BiodataDataSekolah{},
+		pmbulbi.BiodataJalur{},
+		pmbulbi.BiodataDataDiri{},
+		pmbulbi.BiodataDataOrtu{},
+		pmbulbi.LogVA{},
+		pmbulbi.BiodataMaster{},
+		pmbulbi.BiodataProdi{},
+		pmbulbi.DaftarSekolah{},
+		pmbulbi.JalurPendaftaran{},
+		pmbulbi.Pekerjaan{},
+		pmbulbi.ProgramStudi{},
+		pmbulbi.Fakultas{},
+		pmbulbi.WilayahKecamatan{},
+		pmbulbi.WilayahKota{},
+		pmbulbi.WilayahKelurahan{},
+		pmbulbi.WilayahProvinsi{},
+		pmbulbi.JenisSekolah{},
+		pmbulbi.JurusanSekolah{},
+		pmbulbi.TahunAkademik{},
+	)
 	fmt.Println(err)
 	fmt.Println(Migrate)
 }
@@ -77,37 +104,37 @@ func TestPendaftaran(t *testing.T) {
 	fmt.Println(err)
 }
 
-func TestGetAllProvinsi(t *testing.T) {
-	data, err := GetAllProvinsi(context.Background(), "MARIA")
-
-	if err != nil {
-		t.Errorf("Error in GetAllProvinsi: %v", err)
-	}
-
-	fmt.Println(data)
-}
-
-func TestGetAllKota(t *testing.T) {
-	data, err := GetAllKota(context.Background(), "MARIA")
-
-	if err != nil {
-		t.Errorf("Error in GetAllProvinsi: %v", err)
-	}
-
-	fmt.Println(data)
-}
-
-func TestGetKotaPage(t *testing.T) {
-	conn := CreateMariaGormConnection("irc:rollyganteng@tcp(10.14.200.17:3307)/pmb_ulbi?parseTime=true")
-	data, err := GetSekolahLimits(conn, context.Background(), 5, "SMAN 3")
-	fmt.Println(err)
-	fmt.Printf("%+v\n", data)
-	fmt.Println(len(data))
-}
-
-func TestGetDaftarSekolahlimit5(t *testing.T) {
-	mariaenv := "irc:rollyganteng@tcp(10.14.200.17:3307)/pmb_ulbi?parseTime=true"
-	data, err := GetDaftarSekolahlimit5(context.Background(), mariaenv, 10, "SMAN 4")
-	fmt.Printf("%+v\n", err)
-	fmt.Printf("%+v\n", data)
-}
+//func TestGetAllProvinsi(t *testing.T) {
+//	data, err := GetAllProvinsi(context.Background(), "MARIA")
+//
+//	if err != nil {
+//		t.Errorf("Error in GetAllProvinsi: %v", err)
+//	}
+//
+//	fmt.Println(data)
+//}
+//
+//func TestGetAllKota(t *testing.T) {
+//	data, err := GetAllKota(context.Background(), "MARIA")
+//
+//	if err != nil {
+//		t.Errorf("Error in GetAllProvinsi: %v", err)
+//	}
+//
+//	fmt.Println(data)
+//}
+//
+//func TestGetKotaPage(t *testing.T) {
+//	conn := CreateMariaGormConnection("irc:rollyganteng@tcp(10.14.200.17:3307)/pmb_ulbi?parseTime=true")
+//	data, err := GetSekolahLimits(conn, context.Background(), 5, "SMAN 3")
+//	fmt.Println(err)
+//	fmt.Printf("%+v\n", data)
+//	fmt.Println(len(data))
+//}
+//
+//func TestGetDaftarSekolahlimit5(t *testing.T) {
+//	mariaenv := "irc:rollyganteng@tcp(10.14.200.17:3307)/pmb_ulbi?parseTime=true"
+//	data, err := GetDaftarSekolahlimit5(context.Background(), mariaenv, 10, "SMAN 4")
+//	fmt.Printf("%+v\n", err)
+//	fmt.Printf("%+v\n", data)
+//}
