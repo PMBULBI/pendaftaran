@@ -21,3 +21,11 @@ func (r *Repository) GetProdiByJalur(ctx context.Context, jalur string) (dest []
 		Error
 	return
 }
+
+func (r *Repository) Insert(ctx context.Context, val pmbulbi.JalurProdi) (err error) {
+	err = r.db.
+		WithContext(ctx).
+		Create(&val).
+		Error
+	return
+}
