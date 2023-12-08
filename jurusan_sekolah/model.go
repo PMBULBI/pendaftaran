@@ -25,7 +25,7 @@ func (r *Repository) GetById(ctx context.Context, id string) (val pmbulbi.Jurusa
 func (r *Repository) GetJurusanByIdJnsSekolah(ctx context.Context, id_jenis_sekolah string) (dest []pmbulbi.JurusanSekolah, err error) {
 	err = r.db.
 		WithContext(ctx).
-		Where("id_jenis_sekolah LIKE ?", "%"+id_jenis_sekolah+"%").
+		Where("id_jenis_sekolah ILIKE ?", "%"+id_jenis_sekolah+"%").
 		Find(&dest).
 		Error
 	return
