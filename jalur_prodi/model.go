@@ -12,3 +12,12 @@ func (r *Repository) Fetch(ctx context.Context) (val []pmbulbi.JalurProdi, err e
 		Error
 	return
 }
+
+func (r *Repository) GetProdiByJalur(ctx context.Context, jalur string) (dest []pmbulbi.JalurProdi, err error) {
+	err = r.db.
+		WithContext(ctx).
+		Where("jalur ILIKE ?", "%"+jalur+"%").
+		Find(&dest).
+		Error
+	return
+}
