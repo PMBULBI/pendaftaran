@@ -29,3 +29,12 @@ func (r *Repository) Insert(ctx context.Context, val pmbulbi.JalurProdi) (err er
 		Error
 	return
 }
+
+func (r *Repository) Update(ctx context.Context, id string, val pmbulbi.JalurProdi) (err error) {
+	err = r.db.
+		WithContext(ctx).
+		Where("id = ?", id).
+		Updates(&val).
+		Error
+	return
+}
