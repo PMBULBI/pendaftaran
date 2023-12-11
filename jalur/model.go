@@ -8,6 +8,7 @@ import (
 func (r *Repository) Fetch(ctx context.Context) (val []pmbulbi.JalurPendaftaran, err error) {
 	err = r.db.
 		WithContext(ctx).
+		Where("status = ?", "aktif").
 		Find(&val).
 		Error
 	return
