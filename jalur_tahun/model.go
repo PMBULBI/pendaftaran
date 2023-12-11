@@ -13,10 +13,13 @@ func (r *Repository) Fetch(ctx context.Context) (val []pmbulbi.JalurTahun, err e
 	return
 }
 
-func (r *Repository) GetJalurByTahun(ctx context.Context, tahun int) (dest []pmbulbi.JalurTahun, err error) {
+func (r *Repository) GetJalurByTahun(ctx context.Context, tahun int) (dest []pmbulbi.JalurTahunJoin, err error) {
 	err = r.db.
 		WithContext(ctx).
-		Where("tahun = ?", tahun).
+		Table("jalur_tahun jatah").
+		Joins("JOIN jalur_pendaftaran japen ON japen.jalur = jatah.jalur").
+		Where("jatah.tahun = ?", tahun).
+		Select("jatah.*, japen.*").
 		Find(&dest).
 		Error
 	return
