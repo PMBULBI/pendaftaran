@@ -9,7 +9,7 @@ func (r *Repository) GetSekolahLimits(ctx context.Context, lim int, name string)
 	err = r.db.
 		WithContext(ctx).
 		Limit(lim).
-		Where("nama_sekolah LIKE ?", "%"+name+"%").
+		Where("nama_sekolah ILIKE ?", "%"+name+"%").
 		Find(&dest).
 		Error
 	return
