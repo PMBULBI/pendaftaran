@@ -17,8 +17,9 @@ func (r *Repository) GetJalurByTahun(ctx context.Context, tahun int) (dest []pmb
 	err = r.db.
 		WithContext(ctx).
 		Table("jalur_tahun jatah").
-		Joins("JOIN jalur_pendaftaran japen ON japen.jalur = jatah.jalur").
+		Joins("JOIN jalur_pendaftaran japen ON japen.id_jalur = jatah.id_jalur").
 		Where("jatah.tahun = ?", tahun).
+		Where("japen.status = ?", "aktif").
 		Select("jatah.*, japen.*").
 		Find(&dest).
 		Error
