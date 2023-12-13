@@ -8,6 +8,7 @@ import (
 func (r *Repository) Fetch(ctx context.Context) (val []pmbulbi.Agama, err error) {
 	err = r.db.
 		WithContext(ctx).
+		Order("agama ASC").
 		Find(&val).
 		Error
 	return
