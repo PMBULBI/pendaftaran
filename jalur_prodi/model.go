@@ -19,6 +19,7 @@ func (r *Repository) GetProdiByJalur(ctx context.Context, jalur int) (dest []pmb
 		Table("jalur_prodi japrod").
 		Joins("JOIN program_studi prod ON prod.kode_program_studi = japrod.prodi").
 		Where("japrod.id_jalur = ?", jalur).
+		Order("prod.program_studi ASC").
 		Select("japrod.*, prod.*").
 		Find(&dest).
 		Error
