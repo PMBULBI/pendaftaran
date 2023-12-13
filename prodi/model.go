@@ -8,6 +8,7 @@ import (
 func (r *Repository) Fetch(ctx context.Context) (val []pmbulbi.ProgramStudi, err error) {
 	err = r.db.
 		WithContext(ctx).
+		Order("program_studi ASC").
 		Find(&val).
 		Error
 	return
