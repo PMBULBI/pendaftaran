@@ -20,6 +20,7 @@ func (r *Repository) GetJalurByTahun(ctx context.Context, tahun int) (dest []pmb
 		Joins("JOIN jalur_pendaftaran japen ON japen.id_jalur = jatah.id_jalur").
 		Where("jatah.tahun = ?", tahun).
 		Where("japen.status = ?", "aktif").
+		Order("japen.nama_jalur ASC").
 		Select("jatah.*, japen.*").
 		Find(&dest).
 		Error
