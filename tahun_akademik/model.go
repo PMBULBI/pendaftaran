@@ -12,3 +12,11 @@ func (r *Repository) Fetch(ctx context.Context) (val []pmbulbi.TahunAkademik, er
 		Error
 	return
 }
+
+func (r *Repository) Insert(ctx context.Context, val pmbulbi.TahunAkademik) (err error) {
+	err = r.db.
+		WithContext(ctx).
+		Create(&val).
+		Error
+	return
+}
