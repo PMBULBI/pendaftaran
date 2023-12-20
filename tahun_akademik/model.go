@@ -13,6 +13,15 @@ func (r *Repository) Fetch(ctx context.Context) (val []pmbulbi.TahunAkademik, er
 	return
 }
 
+func (r *Repository) GetById(ctx context.Context, id string) (val pmbulbi.TahunAkademik, err error) {
+	err = r.db.
+		WithContext(ctx).
+		Where("id_tahun_akademik = ? ", id).
+		First(&val).
+		Error
+	return
+}
+
 func (r *Repository) Insert(ctx context.Context, val pmbulbi.TahunAkademik) (err error) {
 	err = r.db.
 		WithContext(ctx).
