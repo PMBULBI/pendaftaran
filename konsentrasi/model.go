@@ -21,3 +21,11 @@ func (r *Repository) GetById(ctx context.Context, id string) (val pmbulbi.Konsen
 		Error
 	return
 }
+
+func (r *Repository) Insert(ctx context.Context, val pmbulbi.Konsentrasi) (err error) {
+	err = r.db.
+		WithContext(ctx).
+		Create(&val).
+		Error
+	return
+}
